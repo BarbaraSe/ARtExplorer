@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class UIButtonController : MonoBehaviour
 {
+    
+    public GameObject uiPanel;
     public void InfoBtnPressed(){
 
     }
@@ -36,6 +38,10 @@ public class UIButtonController : MonoBehaviour
     }
 
     public void UndoAllBtnPressed(){
-            
+        
+    }
+
+    public void CancelBtnPressed(){
+        uiPanel.SetActive(false);
     }
 }
