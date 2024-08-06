@@ -10,7 +10,7 @@ Visual Studio 2022
 
 Visual Studio 
 1. Open Folder Install > open .sln file
-2. Settings UI: Debug, ARM64, Remote Machine
+2. Settings UI: WIFI: Debug, ARM64, Remote Machine / USB: Release, ARM64, Device
 3. On right side panel select Universal Windows
 4. Visual Studio: Project > Properties > Configuration Properties > Debugging and put the IP of Hololens inside Machine Name field
 5. Run
