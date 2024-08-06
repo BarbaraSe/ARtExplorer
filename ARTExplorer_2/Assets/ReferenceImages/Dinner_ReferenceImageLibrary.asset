@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 848409ee8ba454f42a5ddff137688a27, type: 3}
   m_Name: Dinner_ReferenceImageLibrary
   m_EditorClassIdentifier: 
-  m_GuidLow: 0
-  m_GuidHigh: 0
+  m_GuidLow: 5313689209697495785
+  m_GuidHigh: 3132140014516551065
   m_DataStore:
     m_Storage: []
   m_Images:
