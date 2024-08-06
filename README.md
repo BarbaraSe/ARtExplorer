@@ -5,8 +5,9 @@ Unity 2022.3.21f
 Visual Studio 2022
 
 ## Run on Hololens
-1. Unity > File > Build Settings > Build > Save inside Folder "Install"
-2. Open Folder Install > open .sln file
+1. Turn on developer mode on your device
+2. Unity > File > Build Settings > Build > Save inside Folder "Install"
+3. Open Folder Install > open .sln file
 
 Visual Studio 
 1. Open Folder Install > open .sln file
