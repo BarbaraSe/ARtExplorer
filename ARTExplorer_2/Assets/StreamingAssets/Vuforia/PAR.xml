@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="shipsimage" size="1.000000 0.474747" />
+    <ImageTarget name="h2o" size="0.100000 0.081287" />
+    <ImageTarget name="co2" size="0.100000 0.069643" />
+    <ImageTarget name="bearqrjpg" size="0.100000 0.098134" />
+    <ImageTarget name="bearimage" size="0.100000 0.097452" />
+  </Tracking>
+</QCARConfig>
