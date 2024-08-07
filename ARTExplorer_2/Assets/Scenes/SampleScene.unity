@@ -247,7 +247,7 @@ PrefabInstance:
     - target: {fileID: 7263872619888771763, guid: c792fd6b1ca29734eb53f1aff71fea4f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b465b5476bd7941058539b70f361e2b9, type: 2}
+      objectReference: {fileID: 2100000, guid: 197855060af0eff49a4847539de63a1b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -692,7 +692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &373134427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1127,7 +1127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &782628376
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1456,7 +1456,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59e8e341d69c5974db6a8adfc4f859fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.025
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59e8e341d69c5974db6a8adfc4f859fa, type: 3}
       propertyPath: m_LocalPosition.y
