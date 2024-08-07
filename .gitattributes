@@ -47,3 +47,5 @@ ARTExplorer_2/Packages/com.ptc.vuforia.engine-10.25.4.tgz filter=lfs diff=lfs me
 *.rns filter=lfs diff=lfs merge=lfs -text
 *.reason filter=lfs diff=lfs merge=lfs -text
 *.lxo filter=lfs diff=lfs merge=lfs -text
+ARTExplorer_2/Assets/Material/HendrickCorneliszShip/Atlas_Norm.png filter=lfs diff=lfs merge=lfs -text
+ARTExplorer_2/Assets/Material/HendrickCorneliszShip/Atlas_Rough.png filter=lfs diff=lfs merge=lfs -text
