@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Microsoft.MixedReality.Toolkit.UI;
 using UnityEngine.UIElements;
 
-public class UIButtonController : MonoBehaviour
+public class UIMenuController : MonoBehaviour
 {
 
     [SerializeField] private GameObject[] objects3D;
@@ -96,7 +96,7 @@ public class UIButtonController : MonoBehaviour
 
     }
 
-    private void UndoLastAction()
+    public void UndoLastAction()
     {
         if (selectedObject != null)
         {

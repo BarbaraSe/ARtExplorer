@@ -1,12 +1,11 @@
 using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.Utilities;
 using UnityEngine;
+using System.Collections;
 
 public class GestureUndo : MonoBehaviour
 {
     public GameObject gameObject; 
-    private bool isMenuOpen = true;
-    
     private Vector3 pinkyTipRStart;
     private Vector3 pinkyKnuckleRStart;
     private Vector3 palmRStart;
@@ -14,19 +13,15 @@ public class GestureUndo : MonoBehaviour
     private Vector3 pinkyKnuckleLStart;
     private Vector3 palmLStart;
     private bool initialMovementDone = false;
-    //private bool handsCrossed = false;
-    //private bool occlusionDetected = false;
     private bool handsMovedApart = false;
     private bool fingerTouching = false;
 
-    // Thresholds
-    //public float crossingThreshold = 0.03f;  
-    //public float occlusionThreshold = 0.02f;
     public float separationDistance = 0.2f;
     public float closingDistance = 0.01f;
-    public float gestureTime = 3.0f;   
+    public float gestureTime = 0.05f;   
 
     private float gestureStartTime;
+    private int countGesture;
 
     void Update()
     {
@@ -35,11 +30,13 @@ public class GestureUndo : MonoBehaviour
             HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Left, out MixedRealityPose pinkyTipL) && 
             HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyKnuckle, Handedness.Left, out MixedRealityPose pinkyKnuckleL))
         {
+
+            Debug.Log($"Start Left {pinkyTipL.Position} Start Right {pinkyTipR.Position}");
+
             if (!initialMovementDone)
             {
                 pinkyTipRStart = pinkyTipR.Position;
                 pinkyKnuckleRStart = pinkyKnuckleR.Position;
-
                 pinkyTipLStart = pinkyTipL.Position;
                 pinkyKnuckleLStart = pinkyKnuckleL.Position;
                 gestureStartTime = Time.time;
@@ -47,54 +44,35 @@ public class GestureUndo : MonoBehaviour
             }
             else
             {
-                // Calculate distances and update gesture state
                 float initDistancePinkyTip = Vector3.Distance(pinkyTipRStart, pinkyTipLStart);
                 float initDistancePinkyKnuckle = Vector3.Distance(pinkyKnuckleRStart, pinkyKnuckleLStart);
-
                 float currentDistancePinkyTip = Vector3.Distance(pinkyTipR.Position, pinkyTipL.Position);
                 float currentDistancePinkyKnuckle = Vector3.Distance(pinkyKnuckleR.Position, pinkyKnuckleL.Position);
 
-                if (!fingerTouching && (Mathf.Abs(currentDistancePinkyTip - initDistancePinkyTip) < closingDistance &&
-                    Mathf.Abs(currentDistancePinkyKnuckle - initDistancePinkyKnuckle) < closingDistance)){
+                Debug.Log($"Init Distance {initDistancePinkyTip} currentDistancePinkyTip {pinkyTipR.Position}");
+                if (!fingerTouching && Mathf.Abs(currentDistancePinkyTip - initDistancePinkyTip) < closingDistance &&
+                    Mathf.Abs(currentDistancePinkyKnuckle - initDistancePinkyKnuckle) < closingDistance){
                     fingerTouching = true;
                 }
 
-                if (fingerTouching && !handsMovedApart && (currentDistancePinkyTip > separationDistance &&
-                    currentDistancePinkyKnuckle > separationDistance))
+                if (fingerTouching && !handsMovedApart && currentDistancePinkyTip > separationDistance &&
+                    currentDistancePinkyKnuckle > separationDistance)
                 {
                     handsMovedApart = true;
                     Debug.LogWarning("Hands moved apart");
-                }
+                
+                    if (Time.time - gestureStartTime <= gestureTime)
+                    {
+                        CompleteGesture();
+                    }
+                } 
 
-                //if (fingerTouching && handsMovedApart) {
-                //    CompleteGesture();
-                //}
-
-                // Check if the gesture is completed within the allowed time
-                if (handsMovedApart&& handsMovedApart && Time.time - gestureStartTime <= gestureTime)
-                {
-                    CompleteGesture();
-                    ResetGesture();
-                    Debug.LogWarning("Within Allowed Time");
-                }
-
-                // Reset if the gesture is incomplete or the time exceeds
-                if (Time.time - gestureStartTime > gestureTime || !handsMovedApart)
+                if (fingerTouching && !handsMovedApart && Time.time - gestureStartTime > gestureTime)
                 {
                     ResetGesture();
-                   // Debug.LogWarning("Reset Gesture Time");
                 }
-                //Debug.Log($"Current Distance: {currentDistance}");
             }
-            
-        
-        }
-        else
-        {
-            ResetGesture();
-            //Debug.LogWarning("Reset Gesture Didnt detect anything");
-        }
-        
+        }    
 
     }
 
@@ -102,24 +80,32 @@ public class GestureUndo : MonoBehaviour
     {
         if (gameObject != null)
         {
-            if (!isMenuOpen) {
+            if (!gameObject.activeSelf) {
                 gameObject.SetActive(true);
-                isMenuOpen = true;
             } else {
                 gameObject.SetActive(false);
-                isMenuOpen = false;
             }
-            Debug.Log("Complex gesture detected! Activating gameObject.");
         }
         else
         {
             Debug.LogWarning("gameObject not assigned.");
         }
+        countGesture += 1;
+        Debug.Log($"Count gesture: {countGesture} ");
+        StartCoroutine(WaitAndExecute());
+        ResetGesture();
     }
 
     void ResetGesture()
     {
+        Debug.LogWarning("RESET GESTURE");
         initialMovementDone = false;
         handsMovedApart = false;
+        countGesture = 0;
+    }
+
+    private IEnumerator WaitAndExecute()
+    {
+        yield return new WaitForSeconds(2f);  
     }
 }
