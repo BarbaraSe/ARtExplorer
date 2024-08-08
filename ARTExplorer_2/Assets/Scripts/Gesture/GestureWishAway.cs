@@ -89,8 +89,7 @@ public class GestureWishAway : MonoBehaviour
             viewController.IntroductionScreen.SetActive(false);
 
             // start image recognition
-            viewController.ImageTargetHarbor.SetActive(true);
-            viewController.ImageTargetDinner.SetActive(true);
+           viewController.StartImageRecognition();
         }
     }
 }
