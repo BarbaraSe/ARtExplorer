@@ -1,5 +1,6 @@
 using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.Utilities;
+using System.Collections;
 using UnityEngine;
 
 public class GestureWishAway : MonoBehaviour
@@ -14,6 +15,9 @@ public class GestureWishAway : MonoBehaviour
     private Vector3 startPositionR;
     private float gestureStartTime;
     private bool gestureInProgress = false;
+    public float delayDuration = 5.0f;  // Delay duration in seconds
+
+    private bool canDetectTouch = true;
 
     void Start(){
         viewController = FindObjectOfType<ViewController>();
@@ -64,7 +68,9 @@ public class GestureWishAway : MonoBehaviour
                 {
                     if (Time.time - gestureStartTime <= gestureTime)
                     {
+                        Debug.Log("Gesture detected, handling menu");
                         OpenCloseMenu();
+                        StartCoroutine(TouchDelay());
                     }
                     gestureInProgress = false;
                 }
@@ -79,7 +85,7 @@ public class GestureWishAway : MonoBehaviour
             gestureInProgress = false;
         }
 
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out MixedRealityPose palmPoseL2) &&
+        /*if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out MixedRealityPose palmPoseL2) &&
             HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out MixedRealityPose palmPoseR2)) {
             
             Vector3 currentPositionL = palmPoseL2.Position;
@@ -100,6 +106,7 @@ public class GestureWishAway : MonoBehaviour
                     if (Time.time - gestureStartTime <= gestureTime)
                     {
                         //CloseCube();
+                        Debug.Log("Gesture detected, undoing action");
                         uIButtonController.UndoLastAction();
                     }
                     gestureInProgress = false;
@@ -109,7 +116,7 @@ public class GestureWishAway : MonoBehaviour
                     gestureInProgress = false;
                 }
             }
-            }
+            }*/
     }
 
     void OpenCloseMenu()
@@ -134,7 +141,7 @@ public class GestureWishAway : MonoBehaviour
         }
     }
 
-    void CloseCube(){
+    /*void CloseCube(){
         if (gameObject != null)
         {
             if (!gameObject.activeSelf) {
@@ -147,5 +154,17 @@ public class GestureWishAway : MonoBehaviour
         {
             Debug.LogWarning("gameObject not assigned.");
         }
+    }*/
+
+    private IEnumerator TouchDelay()
+    {
+        // Prevent further touch detection
+        canDetectTouch = false;
+
+        // Wait for the specified delay duration
+        yield return new WaitForSeconds(delayDuration);
+
+        // Allow touch detection again
+        canDetectTouch = true;
     }
 }

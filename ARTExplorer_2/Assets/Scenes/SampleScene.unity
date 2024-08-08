@@ -6200,7 +6200,6 @@ GameObject:
   - component: {fileID: 482343161}
   - component: {fileID: 482343160}
   - component: {fileID: 482343158}
-  - component: {fileID: 482343156}
   - component: {fileID: 482343155}
   - component: {fileID: 482343167}
   m_Layer: 5
@@ -6209,7 +6208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &482343155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6240,19 +6239,6 @@ MonoBehaviour:
   useFixedVerticalPosition: 0
   fixedVerticalPosition: -0.4
   orientToReferenceDirection: 0
---- !u!114 &482343156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 482343154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c8fcfdda69e0704abd88249dd55b63c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objects3D: []
 --- !u!222 &482343158
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6830,7 +6816,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632381304}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c8fcfdda69e0704abd88249dd55b63c, type: 3}
   m_Name: 
@@ -7008,7 +6994,6 @@ GameObject:
   - component: {fileID: 673084614}
   - component: {fileID: 673084613}
   - component: {fileID: 673084611}
-  - component: {fileID: 673084609}
   - component: {fileID: 673084608}
   m_Layer: 5
   m_Name: IntroductionScreen
@@ -7047,19 +7032,6 @@ MonoBehaviour:
   useFixedVerticalPosition: 0
   fixedVerticalPosition: -0.4
   orientToReferenceDirection: 0
---- !u!114 &673084609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673084606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c8fcfdda69e0704abd88249dd55b63c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objects3D: []
 --- !u!222 &673084611
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7798,6 +7770,93 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874916124}
   m_CullTransparentMesh: 1
+--- !u!1 &887475689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 887475691}
+  - component: {fileID: 887475690}
+  - component: {fileID: 887475693}
+  - component: {fileID: 887475692}
+  m_Layer: 0
+  m_Name: GestureController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &887475690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887475689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c8fcfdda69e0704abd88249dd55b63c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects3D:
+  - {fileID: 919132147725750086}
+  - {fileID: 919132149129201579}
+  - {fileID: 270428015}
+  - {fileID: 9105861204957799864}
+  - {fileID: 8484519028965118535}
+  - {fileID: 4089198255483873314}
+  - {fileID: 4466443428611675276}
+  - {fileID: 4427355531824622236}
+  - {fileID: 2892050243434800287}
+  - {fileID: 3923249817161720451}
+--- !u!4 &887475691
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887475689}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.55632627, y: 0.8928461, z: -0.24092174}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &887475692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887475689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67111369935693488c2fe292bb5b0af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gestureController: {fileID: 887475690}
+  pinkyTouchThreshold: 0.02
+  clapThreshold: 0.05
+  delayDuration: 5
+--- !u!114 &887475693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887475689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2558064e372854d42a27ee936e030484, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObject: {fileID: 782628375}
+  delayDuration: 5
 --- !u!1 &912534872
 GameObject:
   m_ObjectHideFlags: 0
@@ -8106,13 +8165,14 @@ GameObject:
   - component: {fileID: 968785767}
   - component: {fileID: 968785766}
   - component: {fileID: 968785765}
+  - component: {fileID: 968785770}
   m_Layer: 0
   m_Name: GestureScripts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &968785765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8169,7 +8229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2558064e372854d42a27ee936e030484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObject: {fileID: 0}
+  gameObject: {fileID: 782628375}
+  delayDuration: 5
 --- !u!4 &968785769
 Transform:
   m_ObjectHideFlags: 0
@@ -8185,6 +8246,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &968785770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968785764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67111369935693488c2fe292bb5b0af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gestureController: {fileID: 0}
+  pinkyTouchThreshold: 0.02
+  clapThreshold: 0.05
+  delayDuration: 1
 --- !u!1 &1143445895
 GameObject:
   m_ObjectHideFlags: 0
@@ -9491,8 +9568,8 @@ Camera:
   m_GameObject: {fileID: 1820794259}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -19166,3 +19243,4 @@ SceneRoots:
   - {fileID: 673084619}
   - {fileID: 482343166}
   - {fileID: 662126785}
+  - {fileID: 887475691}
