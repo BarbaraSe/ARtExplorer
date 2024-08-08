@@ -5,13 +5,13 @@ using UnityEngine;
 public class ViewController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject welcomeScreen {get;};
+    public GameObject welcomeScreen {get;}
      [SerializeField]
-    private GameObject introductionScreen{get;};
+    public GameObject introductionScreen{get;}
      [SerializeField]
-    private GameObject imageTargetHarbor{get;};
+    public GameObject imageTargetHarbor{get;}
      [SerializeField]
-    private GameObject imageTargetDinner{get;};
+    public GameObject imageTargetDinner{get;}
     
     void Start()
     {

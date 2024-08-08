@@ -6822,9 +6822,7 @@ GameObject:
   - component: {fileID: 673084615}
   - component: {fileID: 673084614}
   - component: {fileID: 673084613}
-  - component: {fileID: 673084612}
   - component: {fileID: 673084611}
-  - component: {fileID: 673084610}
   - component: {fileID: 673084609}
   - component: {fileID: 673084608}
   - component: {fileID: 673084607}
@@ -6894,30 +6892,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objects3D: []
---- !u!114 &673084610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673084606}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14c3d8a4208d4b649529822e217623d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateLinkedTransform: 0
-  moveLerpTime: 0.1
-  rotateLerpTime: 0.1
-  scaleLerpTime: 0
-  maintainScaleOnInitialization: 1
-  smoothing: 1
-  lifetime: 0
-  orientationType: 4
-  localOffset: {x: 0, y: 2, z: 0}
-  worldOffset: {x: 0, y: 0, z: 0}
-  useAngleStepping: 0
-  tetherAngleSteps: 6
 --- !u!222 &673084611
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6926,44 +6900,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 673084606}
   m_CullTransparentMesh: 1
---- !u!114 &673084612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673084606}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e9078183f524b1baa8197daf640b60f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateLinkedTransform: 0
-  moveLerpTime: 0.1
-  rotateLerpTime: 0.1
-  scaleLerpTime: 0
-  maintainScaleOnInitialization: 1
-  smoothing: 1
-  lifetime: 0
-  magneticSurfaces:
-  - serializedVersion: 2
-    m_Bits: 4294967295
-  maxRaycastDistance: 1
-  closestDistance: 0.5
-  surfaceNormalOffset: 0.2
-  surfaceRayOffset: 0
-  raycastMode: 0
-  boxRaysPerEdge: 3
-  orthographicBoxCast: 0
-  maximumNormalVariance: 0.5
-  sphereSize: 1
-  volumeCastSizeOverride: 0
-  useLinkedAltScaleOverride: 0
-  currentRaycastDirectionMode: 2
-  orientationMode: 2
-  orientationBlend: 0.65
-  keepOrientationVertical: 1
-  debugEnabled: 0
 --- !u!114 &673084613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7930,10 +7866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2558064e372854d42a27ee936e030484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  welcomeMenu: {fileID: 482343154}
-  instructionMenu: {fileID: 673084606}
-  gestureDistance: 0.04
-  gestureTime: 0.5
 --- !u!4 &968785769
 Transform:
   m_ObjectHideFlags: 0

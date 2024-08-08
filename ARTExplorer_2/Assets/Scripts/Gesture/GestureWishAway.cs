@@ -5,8 +5,6 @@ using UnityEngine;
 public class GestureWishAway : MonoBehaviour
 {
     ViewController viewController;
-    private GameObject welcomeMenu; 
-    private GameObject instructionMenu;
     private float gestureDistance = 0.1f;  
     private float gestureTime = 0.5f;
     
@@ -50,16 +48,15 @@ public class GestureWishAway : MonoBehaviour
 
     void OpenCloseMenu()
     {
-        if (viewController.welcomeMenu.activeSelf) {
-            viewController.instructionMenu.SetActive(true);
-            viewController.welcomeMenu.SetActive(false);
-        } else if (viewController.instructionMenu.activeSelf) {
-            viewController.instructionMenu.SetActive(false);
+        if (viewController.welcomeScreen.activeSelf) {
+            viewController.introductionScreen.SetActive(true);
+            viewController.welcomeScreen.SetActive(false);
+        } else if (viewController.introductionScreen.activeSelf) {
+            viewController.introductionScreen.SetActive(false);
 
             // start image recognition
             viewController.imageTargetHarbor.SetActive(true);
             viewController.imageTargetDinner.SetActive(true);
-
         }
     }
 }
