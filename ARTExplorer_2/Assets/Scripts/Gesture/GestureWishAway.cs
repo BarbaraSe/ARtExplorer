@@ -48,15 +48,15 @@ public class GestureWishAway : MonoBehaviour
 
     void OpenCloseMenu()
     {
-        if (viewController.welcomeScreen.activeSelf) {
-            viewController.introductionScreen.SetActive(true);
-            viewController.welcomeScreen.SetActive(false);
-        } else if (viewController.introductionScreen.activeSelf) {
-            viewController.introductionScreen.SetActive(false);
+        if (viewController.WelcomeScreen.activeSelf) {
+            viewController.IntroductionScreen.SetActive(true);
+            viewController.WelcomeScreen.SetActive(false);
+        } else if (viewController.IntroductionScreen.activeSelf) {
+            viewController.IntroductionScreen.SetActive(false);
 
             // start image recognition
-            viewController.imageTargetHarbor.SetActive(true);
-            viewController.imageTargetDinner.SetActive(true);
+            viewController.ImageTargetHarbor.SetActive(true);
+            viewController.ImageTargetDinner.SetActive(true);
         }
     }
 }
