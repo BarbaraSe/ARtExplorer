@@ -7,70 +7,74 @@ public class GestureUndo : MonoBehaviour
     public GameObject gameObject; 
     private bool isMenuOpen = true;
     
-    private Vector3 rightHandStart;
-    private Vector3 leftHandStart;
+    private Vector3 pinkyTipRStart;
+    private Vector3 pinkyKnuckleRStart;
+    private Vector3 palmRStart;
+    private Vector3 pinkyTipLStart;
+    private Vector3 pinkyKnuckleLStart;
+    private Vector3 palmLStart;
     private bool initialMovementDone = false;
-    private bool handsCrossed = false;
-    private bool occlusionDetected = false;
+    //private bool handsCrossed = false;
+    //private bool occlusionDetected = false;
     private bool handsMovedApart = false;
+    private bool fingerTouching = false;
 
     // Thresholds
-    public float crossingThreshold = 0.03f;  // Minimum crossing distance (in meters)
-    public float occlusionThreshold = 0.02f; // Threshold for detecting occlusion (in meters)
-    public float separationDistance = 0.05f; // Minimum distance after separation (in meters)
-    public float gestureTime = 5.0f;         // Maximum time allowed to complete the gesture (in seconds)
+    //public float crossingThreshold = 0.03f;  
+    //public float occlusionThreshold = 0.02f;
+    public float separationDistance = 0.2f;
+    public float closingDistance = 0.01f;
+    public float gestureTime = 3.0f;   
 
     private float gestureStartTime;
 
     void Update()
     {
-
-        
-
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out MixedRealityPose rightHandPose) &&
-            HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out MixedRealityPose leftHandPose))
+        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Right, out MixedRealityPose pinkyTipR) &&
+            HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyKnuckle, Handedness.Right, out MixedRealityPose pinkyKnuckleR) &&
+            HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Left, out MixedRealityPose pinkyTipL) && 
+            HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyKnuckle, Handedness.Left, out MixedRealityPose pinkyKnuckleL))
         {
-            Debug.LogWarning("PALM DETECTED");
-            //Debug.Log($"Right Hand Position: {rightHandPose.Position}");
-            //Debug.Log($"Left Hand Position: {leftHandPose.Position}");
             if (!initialMovementDone)
             {
-                rightHandStart = rightHandPose.Position;
-                leftHandStart = leftHandPose.Position;
+                pinkyTipRStart = pinkyTipR.Position;
+                pinkyKnuckleRStart = pinkyKnuckleR.Position;
+
+                pinkyTipLStart = pinkyTipL.Position;
+                pinkyKnuckleLStart = pinkyKnuckleL.Position;
                 gestureStartTime = Time.time;
                 initialMovementDone = true;
             }
             else
             {
                 // Calculate distances and update gesture state
-                float initialDistance = Vector3.Distance(rightHandStart, leftHandStart);
-                float currentDistance = Vector3.Distance(rightHandPose.Position, leftHandPose.Position);
+                float initDistancePinkyTip = Vector3.Distance(pinkyTipRStart, pinkyTipLStart);
+                float initDistancePinkyKnuckle = Vector3.Distance(pinkyKnuckleRStart, pinkyKnuckleLStart);
 
-                // Detect crossing of hands
-                if (!handsCrossed && Mathf.Abs(currentDistance - initialDistance) > crossingThreshold)
-                {
-                    handsCrossed = true;
-                    Debug.LogWarning("Hands Crossed");
+                float currentDistancePinkyTip = Vector3.Distance(pinkyTipR.Position, pinkyTipL.Position);
+                float currentDistancePinkyKnuckle = Vector3.Distance(pinkyKnuckleR.Position, pinkyKnuckleL.Position);
+
+                if (!fingerTouching && (Mathf.Abs(currentDistancePinkyTip - initDistancePinkyTip) < closingDistance &&
+                    Mathf.Abs(currentDistancePinkyKnuckle - initDistancePinkyKnuckle) < closingDistance)){
+                    fingerTouching = true;
                 }
 
-                // Detect occlusion
-                if (handsCrossed && !occlusionDetected && currentDistance < occlusionThreshold)
-                {
-                    occlusionDetected = true;
-                    Debug.LogWarning("Occlusion Detected");
-                }
-
-                // Detect hands moving apart
-                if (occlusionDetected && !handsMovedApart && currentDistance > separationDistance)
+                if (fingerTouching && !handsMovedApart && (currentDistancePinkyTip > separationDistance &&
+                    currentDistancePinkyKnuckle > separationDistance))
                 {
                     handsMovedApart = true;
                     Debug.LogWarning("Hands moved apart");
                 }
 
+                //if (fingerTouching && handsMovedApart) {
+                //    CompleteGesture();
+                //}
+
                 // Check if the gesture is completed within the allowed time
-                if (handsMovedApart && Time.time - gestureStartTime <= gestureTime)
+                if (handsMovedApart&& handsMovedApart && Time.time - gestureStartTime <= gestureTime)
                 {
                     CompleteGesture();
+                    ResetGesture();
                     Debug.LogWarning("Within Allowed Time");
                 }
 
@@ -78,7 +82,7 @@ public class GestureUndo : MonoBehaviour
                 if (Time.time - gestureStartTime > gestureTime || !handsMovedApart)
                 {
                     ResetGesture();
-                    Debug.LogWarning("Reset Gesture");
+                   // Debug.LogWarning("Reset Gesture Time");
                 }
                 //Debug.Log($"Current Distance: {currentDistance}");
             }
@@ -88,6 +92,7 @@ public class GestureUndo : MonoBehaviour
         else
         {
             ResetGesture();
+            //Debug.LogWarning("Reset Gesture Didnt detect anything");
         }
         
 
@@ -115,8 +120,6 @@ public class GestureUndo : MonoBehaviour
     void ResetGesture()
     {
         initialMovementDone = false;
-        handsCrossed = false;
-        occlusionDetected = false;
         handsMovedApart = false;
     }
 }

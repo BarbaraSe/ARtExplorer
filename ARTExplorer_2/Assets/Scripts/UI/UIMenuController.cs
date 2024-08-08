@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Microsoft.MixedReality.Toolkit.UI;
 using UnityEngine.UIElements;
 
@@ -54,10 +55,10 @@ public class UIButtonController : MonoBehaviour
 
         // TODO: Swap all Keyboard Inputs with corresponding UI Events
 
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            ObjectVisbilityButton();
-        }
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    ObjectVisbilityButton();
+        //}
 
         if(Input.GetKeyDown(KeyCode.Backspace))
         {
@@ -95,30 +96,6 @@ public class UIButtonController : MonoBehaviour
 
     }
 
-    public void InfoBtnPressed()
-    {
-
-    }
-
-    // Disables 3D objects shows only painting
-
-    public void ObjectVisbilityButton()
-    {
-        foreach (var keyValue in initialTransforms)
-        {
-            if (keyValue.Value.GameObject.activeSelf)
-            {
-                keyValue.Value.GameObject.SetActive(false);
-                Debug.Log("Disable Objetc Visibility");
-            }
-            else
-            {
-                keyValue.Value.GameObject.SetActive(true);
-                Debug.Log("Enable Objetc Visibility");
-            }
-        }
-    }
-
     private void UndoLastAction()
     {
         if (selectedObject != null)
@@ -142,6 +119,25 @@ public class UIButtonController : MonoBehaviour
         {
             Debug.LogWarning("No last grabbed object to undo.");
         }
+    }
+
+    // Disables 3D objects shows only painting
+
+    public void ObjectVisibilityButton()
+    {
+        foreach (var keyValue in initialTransforms)
+        {
+            if (keyValue.Value.GameObject.activeSelf)
+            {
+                keyValue.Value.GameObject.SetActive(false);
+                Debug.Log("Disable Object Visibility");
+            }
+            else
+            {
+                keyValue.Value.GameObject.SetActive(true);
+                Debug.Log("Enable Object Visibility");
+        }
+    }
     }
 
     // reset transform of specific object
@@ -171,10 +167,14 @@ public class UIButtonController : MonoBehaviour
         }
     }
 
-    public void CancelUI()
-    {
-        //uiPanel.SetActive(false);
+    public void GetGeneralInformationBtnPressed(){
+
     }
+
+    public void GetPaintingInformationBtnPressed(){
+
+    }
+
 }
 
 
