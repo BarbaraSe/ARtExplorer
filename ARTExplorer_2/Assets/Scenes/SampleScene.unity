@@ -305,6 +305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 113567941}
+  - component: {fileID: 113567942}
   m_Layer: 0
   m_Name: UI Handler
   m_TagString: Untagged
@@ -327,6 +328,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &113567942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113567940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71cbee959d51bb943889f81ce41fcc95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects3D:
+  - {fileID: 919132147725750086}
+  - {fileID: 919132149129201579}
+  - {fileID: 270428015}
 --- !u!1 &223974226
 GameObject:
   m_ObjectHideFlags: 0
@@ -6873,6 +6890,7 @@ GameObject:
   - component: {fileID: 1820794267}
   - component: {fileID: 1820794266}
   - component: {fileID: 1820794265}
+  - component: {fileID: 1820794268}
   m_Layer: 0
   m_Name: ARCamera
   m_TagString: MainCamera
@@ -6923,8 +6941,8 @@ Camera:
   m_GameObject: {fileID: 1820794259}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -7038,6 +7056,24 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!114 &1820794268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820794259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2a9c34df4095f47b9ca8f975175f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Device: 0
+  m_PoseSource: 2
+  m_PoseProviderComponent: {fileID: 0}
+  m_TrackingType: 0
+  m_UpdateType: 0
+  m_UseRelativeTransform: 0
 --- !u!1 &1828601335
 GameObject:
   m_ObjectHideFlags: 0
@@ -7081,7 +7117,7 @@ GameObject:
   - component: {fileID: 2009095055}
   - component: {fileID: 2009095054}
   - component: {fileID: 2009095053}
-  - component: {fileID: 2009095052}
+  - component: {fileID: 2009095056}
   m_Layer: 0
   m_Name: ImageTargetHarbour
   m_TagString: Untagged
@@ -7089,25 +7125,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2009095052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009095051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1778676317, guid: 8a9a760f95896c34689febc965510927, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mObserverBehaviour: {fileID: 2009095054}
-  mHiddenRoot: {fileID: 0}
-  mTargetName: HarbourOfAmsterdam
-  mDatasetName: 
-  mCastedBehaviour: {fileID: 2009095054}
-  mMeshFilter: {fileID: 0}
-  mMeshRenderer: {fileID: 0}
 --- !u!114 &2009095053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7178,7 +7195,7 @@ MonoBehaviour:
   mMotionHint: 1
   mTrackingOptimization: 0
   mTrackingOptimizationNeedsUpgrade: 0
-  mPreview: {fileID: 2009095052}
+  mPreview: {fileID: 2009095056}
 --- !u!4 &2009095055
 Transform:
   m_ObjectHideFlags: 0
@@ -7197,6 +7214,25 @@ Transform:
   - {fileID: 270138127}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2009095056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009095051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1778676317, guid: 8a9a760f95896c34689febc965510927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mObserverBehaviour: {fileID: 2009095054}
+  mHiddenRoot: {fileID: 0}
+  mTargetName: HarbourOfAmsterdam
+  mDatasetName: 
+  mCastedBehaviour: {fileID: 2009095054}
+  mMeshFilter: {fileID: 0}
+  mMeshRenderer: {fileID: 0}
 --- !u!1 &42031536579654137
 GameObject:
   m_ObjectHideFlags: 0
