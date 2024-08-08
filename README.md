@@ -11,7 +11,18 @@ An augmented reality application for the Microsoft HoloLens®, developed using t
 <br>
 
 ## About
-tbd<br>
+ARtExplorer lets you see art like never before:
+- View selected paintings and discover virtual objects emerging from the artwork
+- Interact with these objects by moving, rotating, and resizing them
+- Gain fresh perspectives and explore additional details
+- Combine elements from different paintings to create unique compositions
+- Integrate virtual objects into your physical surroundings
+- Compare the objects with the original paintings to enhance your understanding
+- Access additional information and insights about each artwork
+<br>
+
+Screenshots/Video
+tbd
 
 Used Packeges:
 - Vuforia for Image Detection
@@ -65,5 +76,5 @@ cd ARtExplorer
 - Info PIN: Settings > Update > For Developers > Under Device discovery > Pair
 
 <br>
-Have fun bringing objects from artworks into your reality and exploring art in a new way - Your ARtExplorer Team
+Have fun bringing objects from artworks into your reality and exploring art in a new way ~ Your ARtExplorer Team
 <br>
