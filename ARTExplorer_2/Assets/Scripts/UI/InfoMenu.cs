@@ -11,11 +11,11 @@ public class InfoMenu : MonoBehaviour
             panelDetail.SetActive(false);
         } else {
             panelDetail.SetActive(true);
-            PositionPanel(new Vector2(5, 0));
+            PositionPanel(new Vector3(5, 0, 0));
         }
     }
   
-    private void PositionPanel(Vector2 offset)
+    private void PositionPanel(Vector3 offset)
     {
         if (gameObject != null && panelDetail != null)
         {

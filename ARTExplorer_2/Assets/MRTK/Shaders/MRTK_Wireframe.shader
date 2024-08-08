@@ -98,13 +98,13 @@ Shader "Mixed Reality Toolkit/Wireframe"
                 // Calculate the area of the triangle.
                 float2 vector0 = point2 - point1;
                 float2 vector1 = point2 - point0;
-                float2 vector2 = point1 - point0;
-                float area = abs(vector1.x * vector2.y - vector1.y * vector2.x);
+                float2 Vector3 = point1 - point0;
+                float area = abs(vector1.x * Vector3.y - vector1.y * Vector3.x);
 
                 float3 distScale[3];
                 distScale[0] = float3(area / length(vector0), 0, 0);
                 distScale[1] = float3(0, area / length(vector1), 0);
-                distScale[2] = float3(0, 0, area / length(vector2));
+                distScale[2] = float3(0, 0, area / length(Vector3));
 
                 float wireScale = 800 - _WireThickness;
 
