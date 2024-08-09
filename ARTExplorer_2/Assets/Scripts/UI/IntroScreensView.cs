@@ -17,8 +17,10 @@ public class IntroScreensView : MonoBehaviour
     [SerializeField]
     private GameObject _swipeText;
     private float delay = 2f;
+    public bool welcome;
     
     public void StartExperience() {
+        welcome = true;
         SetIntroductionScreens(true);
         SetWelcomePanelActive(true);
         SetSwipeTextActive(false);

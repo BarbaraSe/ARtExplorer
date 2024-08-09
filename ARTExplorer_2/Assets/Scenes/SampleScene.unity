@@ -7970,7 +7970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4650336336052702772, guid: 184450d7fd18e3742b0612f6901efe5e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.05
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 4650336336052702772, guid: 184450d7fd18e3742b0612f6901efe5e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8085,6 +8085,8 @@ PrefabInstance:
     - {fileID: 4650336336052702771, guid: 184450d7fd18e3742b0612f6901efe5e, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4907618835566112539, guid: 184450d7fd18e3742b0612f6901efe5e, type: 3}
+    - {fileID: 4907618835034080737, guid: 184450d7fd18e3742b0612f6901efe5e, type: 3}
+    - {fileID: 4907618834913979331, guid: 184450d7fd18e3742b0612f6901efe5e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 184450d7fd18e3742b0612f6901efe5e, type: 3}
@@ -8303,6 +8305,7 @@ MonoBehaviour:
   _introductionPanel1: {fileID: 912534872}
   _introductionPanel2: {fileID: 1392749851}
   _swipeText: {fileID: 1600737704}
+  welcome: 0
 --- !u!1 &673482819
 GameObject:
   m_ObjectHideFlags: 0

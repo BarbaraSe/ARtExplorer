@@ -102,7 +102,9 @@ public class GestureWishAway2 : MonoBehaviour
             {
                 _introScreensView.SetIntroductionPanel2Active(false);
                 _introScreensView.SetIntroductionScreens(false);
-                _viewController.StartImageRecognition();
+                if(_introScreensView.welcome) {
+                    _viewController.StartImageRecognition();
+                }
             }
         } else if (_infoPaintingMenuView.InfoPanelState) {
             // TODO panels

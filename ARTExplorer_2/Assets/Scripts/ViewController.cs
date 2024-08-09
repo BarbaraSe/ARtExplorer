@@ -28,8 +28,7 @@ public class ViewController : MonoBehaviour
         {
             item.SetActive(false);
         }
-
-        //StartImageRecognition(); // löschen !!!
+        //StartImageRecognition();
     }
 
     public void StartImageRecognition(){
@@ -49,6 +48,6 @@ public class ViewController : MonoBehaviour
         infoButtonMenu.SetActive(false);
         childCopyBtn.AddComponent<InfoMenu>();
         childCopyBtn.transform.name = "InfoBtn";
-        childCopyBtn.transform.localPosition = new Vector3(0.5f, 0, 0);
+        childCopyBtn.transform.localPosition = new Vector3(0.2f, 0, 0);
     }
 }

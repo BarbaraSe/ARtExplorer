@@ -32,6 +32,17 @@ public class InfoMenu : MonoBehaviour
 
     public void AddButtonListeners(){
         PressableButton[] buttons = _menuDetail.transform.GetComponentsInChildren<PressableButton>();
+        foreach (var item in buttons)
+        {
+        Debug.Log(item.name);
+        if (item.name == "GeneralInfo") {
+            item.ButtonPressed.AddListener(GetGeneralInformation);
+        } else if (item.name == "PaintingInfo") {
+            item.ButtonPressed.AddListener(GetDetailedPaintingInformation);
+        } else if (item.name == "Hide3DBtn") {
+            item.ButtonPressed.AddListener(_uIMenuController.ObjectVisibilityButton);
+        }
+        }
 
         if ( gameObject.GetComponent<PressableButton>() != null)
         {
@@ -41,10 +52,6 @@ public class InfoMenu : MonoBehaviour
         {
             Debug.LogError("Info button component not found!");
         }
-
-        buttons[0].ButtonPressed.AddListener(GetGeneralInformation);
-        buttons[1].ButtonPressed.AddListener(GetDetailedPaintingInformation);
-        buttons[2].ButtonPressed.AddListener(_uIMenuController.ObjectVisibilityButton);
     }
 
     public void OpenInfoDetailMenu()
@@ -64,8 +71,9 @@ public class InfoMenu : MonoBehaviour
     public void GetGeneralInformation()
     {
         Debug.Log("Generel Info Button pressed");
-        GameObject introductionScreen = GameObject.Find("IntroductionScreen");
-        introductionScreen.SetActive(true);
+        IntroScreensView introductionScreen = GameObject.Find("IntroductionScreens").GetComponent<IntroScreensView>();
+        introductionScreen.SetIntroductionScreens(true);
+        introductionScreen.SetIntroductionPanel1Active(true);
     }
 
     public void GetDetailedPaintingInformation()
