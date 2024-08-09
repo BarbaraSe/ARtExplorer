@@ -7855,7 +7855,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2558064e372854d42a27ee936e030484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObject: {fileID: 782628375}
   delayDuration: 5
 --- !u!1 &912534872
 GameObject:
@@ -8229,7 +8228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2558064e372854d42a27ee936e030484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObject: {fileID: 782628375}
   delayDuration: 5
 --- !u!4 &968785769
 Transform:
@@ -10055,7 +10053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatusFilter: 1
+  StatusFilter: 2
   UsePoseSmoothing: 0
   AnimationCurve:
     serializedVersion: 2
@@ -10083,10 +10081,34 @@ MonoBehaviour:
     m_RotationOrder: 4
   OnTargetFound:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 887475690}
+        m_TargetAssemblyTypeName: UIMenuController, Assembly-CSharp
+        m_MethodName: TargetFound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnTargetLost:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 887475690}
+        m_TargetAssemblyTypeName: UIMenuController, Assembly-CSharp
+        m_MethodName: TargetLost
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2009095054
 MonoBehaviour:
   m_ObjectHideFlags: 0

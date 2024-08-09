@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class GestureWishAway : MonoBehaviour
 {
-    public GameObject gameObject; 
     private ViewController viewController;
     private UIMenuController uIButtonController;
     private float gestureDistance = 0.1f;
@@ -17,7 +16,7 @@ public class GestureWishAway : MonoBehaviour
     private bool gestureInProgress = false;
     public float delayDuration = 5.0f;  // Delay duration in seconds
 
-    private bool canDetectTouch = true;
+    private bool canDetectSwipe = true;
 
     void Start(){
         viewController = FindObjectOfType<ViewController>();
@@ -38,11 +37,13 @@ public class GestureWishAway : MonoBehaviour
             }
             else
             {
-                if (Vector3.Distance(startPositionL, currentPositionL) >= gestureDistance)
+                if (Vector3.Distance(startPositionL, currentPositionL) >= gestureDistance && canDetectSwipe)
                 {
                     if (Time.time - gestureStartTime <= gestureTime)
                     {
+                        Debug.Log("Gesture detected, handling menu");
                         OpenCloseMenu();
+                        StartCoroutine(TouchDelay());
                     }
                     gestureInProgress = false;
                 }
@@ -64,7 +65,7 @@ public class GestureWishAway : MonoBehaviour
             }
             else
             {
-                if (Vector3.Distance(startPositionR, currentPositionR) >= gestureDistance)
+                if (Vector3.Distance(startPositionR, currentPositionR) >= gestureDistance &&  canDetectSwipe)
                 {
                     if (Time.time - gestureStartTime <= gestureTime)
                     {
@@ -158,13 +159,9 @@ public class GestureWishAway : MonoBehaviour
 
     private IEnumerator TouchDelay()
     {
-        // Prevent further touch detection
-        canDetectTouch = false;
-
-        // Wait for the specified delay duration
+        canDetectSwipe = false;
         yield return new WaitForSeconds(delayDuration);
-
-        // Allow touch detection again
-        canDetectTouch = true;
+        Debug.Log("Waiting");
+        canDetectSwipe = true;
     }
 }

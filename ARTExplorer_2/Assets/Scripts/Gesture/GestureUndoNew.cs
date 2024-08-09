@@ -47,15 +47,16 @@ public class GestureUndoNew : MonoBehaviour
     private IEnumerator PinkyTouchDelay()
     {
         canDetectPinkyTouch = false;
-        yield return new WaitForSeconds(delayDuration);
-
+        yield return new WaitForSeconds(5);
+        Debug.Log("Waiting");
         canDetectPinkyTouch = true;
     }
 
     private IEnumerator ClapDelay()
     {
         canDetectClap = false;
-        yield return new WaitForSeconds(delayDuration);
+        yield return new WaitForSeconds(5);
+        Debug.Log("Waiting");
         canDetectClap = true;
     }
 }
