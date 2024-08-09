@@ -21,8 +21,11 @@ ARtExplorer lets you see art like never before:
 - Access additional information and insights about each artwork
 <br>
 
-Screenshots/Video
-tbd
+<img src="https://github.com/user-attachments/assets/cb29fc58-1e10-4f93-8a12-284677844253" alt="Ship_Interaction_HoloLens" width="400"/>
+<img src="https://github.com/user-attachments/assets/83a1e1bc-a045-467b-9560-0c00c15808d8" alt="Both_Paintings_HoloLens" width="400"/>
+<img src="https://github.com/user-attachments/assets/64449638-0a8f-4df2-ae69-30db92e6e531" alt="Combine_Paintings_HoloLens" width="400"/>
+<img src="https://github.com/user-attachments/assets/0a89ec41-42bf-45da-9c7e-722d6f03b726" alt="User" width="400"/>
+<br><br>
 
 Used Packeges:
 - Vuforia for Image Detection
