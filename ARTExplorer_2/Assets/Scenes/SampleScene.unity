@@ -7561,6 +7561,8 @@ MonoBehaviour:
   _startInfoPanel: {fileID: 1928667450}
   _aboutPaintingInfoPanel: {fileID: 1052580419}
   _aboutInfoPanel: {fileID: 988731928}
+  _paintingInfos: []
+  _parentName: 
 --- !u!1 &373134426
 GameObject:
   m_ObjectHideFlags: 0

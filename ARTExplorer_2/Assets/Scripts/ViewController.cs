@@ -17,7 +17,7 @@ public class ViewController : MonoBehaviour
     [SerializeField]
     private GameObject _introductionScreens;
     [SerializeField]
-    private GameObject _infoScreens;
+    public GameObject _infoScreens;
 
     private GameObject[] _paintings;
     private IntroScreensView _introScreensView;
@@ -34,6 +34,10 @@ public class ViewController : MonoBehaviour
             item.SetActive(false);
         }
         //StartImageRecognition();
+    }
+
+    public void SetInfoScreensActive(){
+        _infoScreens.SetActive(true);
     }
 
     public void StartImageRecognition(){
@@ -53,6 +57,6 @@ public class ViewController : MonoBehaviour
         infoButtonMenu.SetActive(false);
         childCopyBtn.AddComponent<InfoMenu>();
         childCopyBtn.transform.name = "InfoBtn";
-        childCopyBtn.transform.localPosition = new Vector3(0.2f, 0, 0);
+        childCopyBtn.transform.localPosition = new Vector3(0.4f, 0, 0);
     }
 }
