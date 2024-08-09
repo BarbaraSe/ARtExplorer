@@ -9,6 +9,7 @@ public class GestureWishAway : MonoBehaviour
     private UIMenuController _uIButtonController;
     private PaintingInfoAboutPaintingView _infoPaintingMenuView;
     private PaintingInfoScreensController _paintingInfoScreensController;
+    private PaintingInfoPanelView _paintingInfoPanelView;
     private IntroScreensView _introScreensView;
     private float gestureDistance = 0.1f;
     private float gestureTime = 0.5f;
@@ -17,7 +18,7 @@ public class GestureWishAway : MonoBehaviour
     private Vector3 startPositionR;
     private float gestureStartTime;
     private bool gestureInProgress = false;
-    public float delayDuration = 5.0f;  // Delay duration in seconds
+    public float delayDuration = 2.0f;  // Delay duration in seconds
 
     private bool canDetectSwipe = true;
 
@@ -25,7 +26,7 @@ public class GestureWishAway : MonoBehaviour
         _viewController = FindObjectOfType<ViewController>();
         _uIButtonController = FindObjectOfType<UIMenuController>();
         _introScreensView = FindObjectOfType<IntroScreensView>();
-
+        _paintingInfoPanelView = FindObjectOfType<PaintingInfoPanelView>();
     }
 
     void Update()
@@ -119,9 +120,11 @@ public class GestureWishAway : MonoBehaviour
            } else if (_paintingInfoScreensController.GetAboutInfoActiveStatus()) {
             _paintingInfoScreensController.SetAboutInfoActive(false);
             _paintingInfoScreensController.SetStartInfoPanelActive(true);
+            _paintingInfoPanelView.SetAllItemsFalse();
            } else if (_paintingInfoScreensController.GetPaintingInfoActiveStatus()) {
             _paintingInfoScreensController.SetPaintingInfoActive(false);
             _paintingInfoScreensController.SetStartInfoPanelActive(true);
+             _paintingInfoPanelView.SetAllItemsFalse();
            }
         }
     }

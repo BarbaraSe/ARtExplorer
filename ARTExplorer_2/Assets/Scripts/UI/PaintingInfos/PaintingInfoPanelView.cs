@@ -55,6 +55,14 @@ public class PaintingInfoPanelView : MonoBehaviour
        }
     }
 
+    public void SetAllItemsFalse(){
+        for (int i = 1; i < titles.Length; i++)
+       {
+            titles[i].enabled = false;
+            details[i].enabled  = false;
+       }
+    }
+
     public void SetInfoPanelHeader(string text){
         _infoPanelTitle.text = text;
     }
@@ -67,6 +75,8 @@ public class PaintingInfoPanelView : MonoBehaviour
             if (idx <4) {
                 titles[idx].text = item.Title;
                 details[idx].text = item.Detail;
+                titles[idx].enabled = true;
+                details[idx].enabled = true;
                 idx += 1;
             }
             
