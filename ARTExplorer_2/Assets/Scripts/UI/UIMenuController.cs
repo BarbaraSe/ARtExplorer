@@ -1,21 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Microsoft.MixedReality.Toolkit.UI;
-using Vuforia;
+using UnityEngine.UIElements;
 
 public class UIMenuController : MonoBehaviour
 {
+
     [SerializeField] private GameObject[] objects3D;
 
     private GameObject selectedObject;
-
     private Dictionary<string, TransformData> initialTransforms;
     private Dictionary<string, TransformData> recentTransforms;
 
-    private bool initialTransformsUpdated = false;
-    private bool isTargetTracked = false;
-
+    // Contains all necessary data to manipulate the objects using the UI
     private struct TransformData
     {
         public Vector3 Position { get; }
@@ -23,7 +22,6 @@ public class UIMenuController : MonoBehaviour
         public Vector3 Scale { get; }
         public GameObject GameObject { get; }
         public Transform Transform => GameObject.transform;
-
         public TransformData(GameObject gameObject)
         {
             Position = gameObject.transform.position;
@@ -33,32 +31,36 @@ public class UIMenuController : MonoBehaviour
         }
     }
 
-    void Start()
+        void Start()
     {
+        // Store initial transforms
         initialTransforms = new Dictionary<string, TransformData>();
         recentTransforms = new Dictionary<string, TransformData>();
 
         for (int i = 0; i < objects3D.Length; i++)
         {
             GameObject obj = objects3D[i];
-            string identifier = obj.name;
-            initialTransforms[identifier] = new TransformData(obj);
+            string identifier = objects3D[i].name; // Using object name as identifier for each object
+            initialTransforms[identifier] = new TransformData(objects3D[i]);
 
+            // Look for the object manipulator component on the objects and listen to it
             var objectManipulator = obj.GetComponent<ObjectManipulator>();
             objectManipulator.OnManipulationStarted.AddListener(OnManipulationStarted);
             objectManipulator.OnManipulationEnded.AddListener(OnManipulationEnded);
         }
     }
 
-    void Update()
+    private void Update()
     {
-        if (isTargetTracked && !initialTransformsUpdated)
-        {
-            initialTransformsUpdated = true;
-            UpdateInitialTransforms();
-        }
 
-        if (Input.GetKeyDown(KeyCode.Backspace))
+        // TODO: Swap all Keyboard Inputs with corresponding UI Events
+
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    ObjectVisbilityButton();
+        //}
+
+        if(Input.GetKeyDown(KeyCode.Backspace))
         {
             Debug.Log("Reset All Objects");
             UndoEverythingButton();
@@ -68,17 +70,11 @@ public class UIMenuController : MonoBehaviour
         {
             UndoLastAction();
         }
-    }
-
-    public void TargetFound()
-    {
-        isTargetTracked = true;
-        StartCoroutine(WaitForObjectsTracking(3.0f));
-    }
-
-    public void TargetLost()
-    {
-        Debug.Log("Womp Womp");
+        
+        /* if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            UndoTransformButton(lastSelectedObject.name);
+        } */
     }
 
     private void OnManipulationStarted(ManipulationEventData eventData)
@@ -88,6 +84,7 @@ public class UIMenuController : MonoBehaviour
         string identifier = selectedObject.name;
         if (initialTransforms.ContainsKey(identifier))
         {
+            // Store the most recent transform before manipulation starts
             recentTransforms[identifier] = new TransformData(selectedObject);
         }
         Debug.Log($"Object {selectedObject.name} grabbed.");
@@ -96,23 +93,7 @@ public class UIMenuController : MonoBehaviour
     private void OnManipulationEnded(ManipulationEventData eventData)
     {
         Debug.Log($"Object {eventData.ManipulationSource.name} released.");
-    }
 
-    private IEnumerator WaitForObjectsTracking(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        UpdateInitialTransforms();
-    }
-
-    private void UpdateInitialTransforms()
-    {
-        for (int i = 0; i < objects3D.Length; i++)
-        {
-            GameObject obj = objects3D[i];
-            string identifier = obj.name;
-            initialTransforms[identifier] = new TransformData(obj);
-            Debug.Log($"Updated initial transform for {identifier} after tracking.");
-        }
     }
 
     public void UndoLastAction()
@@ -140,6 +121,26 @@ public class UIMenuController : MonoBehaviour
         }
     }
 
+    // Disables 3D objects shows only painting
+
+    public void ObjectVisibilityButton()
+    {
+        foreach (var keyValue in initialTransforms)
+        {
+            if (keyValue.Value.GameObject.activeSelf)
+            {
+                keyValue.Value.GameObject.SetActive(false);
+                Debug.Log("Disable Object Visibility");
+            }
+            else
+            {
+                keyValue.Value.GameObject.SetActive(true);
+                Debug.Log("Enable Object Visibility");
+        }
+    }
+    }
+
+    // reset transform of specific object
     public void UndoTransformButton(string identifier)
     {
         if (initialTransforms.ContainsKey(identifier))
@@ -157,6 +158,7 @@ public class UIMenuController : MonoBehaviour
         }
     }
 
+    //reset transform of all objects
     public void UndoEverythingButton()
     {
         foreach (var keyValue in initialTransforms)
@@ -165,16 +167,8 @@ public class UIMenuController : MonoBehaviour
         }
     }
 
-    public void ObjectVisibilityButton()
-    {
-        foreach (var keyValue in initialTransforms)
-        {
-            keyValue.Value.GameObject.SetActive(!keyValue.Value.GameObject.activeSelf);
-            Debug.Log(keyValue.Value.GameObject.activeSelf ? "Enable Object Visibility" : "Disable Object Visibility");
-        }
-    }
 
-    public void GetGeneralInformationBtnPressed() { }
 
-    public void GetPaintingInformationBtnPressed() { }
 }
+
+

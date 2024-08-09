@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class GestureWishAway : MonoBehaviour
 {
-    private ViewController viewController;
-    private UIMenuController uIButtonController;
+    private ViewController _viewController;
+    private UIMenuController _uIButtonController;
+    private PaintingInfoAboutPaintingView _infoPaintingMenuView;
+    private IntroScreensView _introScreensView;
     private float gestureDistance = 0.1f;
     private float gestureTime = 0.5f;
 
@@ -19,8 +21,10 @@ public class GestureWishAway : MonoBehaviour
     private bool canDetectSwipe = true;
 
     void Start(){
-        viewController = FindObjectOfType<ViewController>();
-        uIButtonController = FindObjectOfType<UIMenuController>();
+        _viewController = FindObjectOfType<ViewController>();
+        _uIButtonController = FindObjectOfType<UIMenuController>();
+        _introScreensView = FindObjectOfType<IntroScreensView>();
+
     }
 
     void Update()
@@ -85,78 +89,33 @@ public class GestureWishAway : MonoBehaviour
         {
             gestureInProgress = false;
         }
-
-        /*if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out MixedRealityPose palmPoseL2) &&
-            HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out MixedRealityPose palmPoseR2)) {
-            
-            Vector3 currentPositionL = palmPoseL2.Position;
-            Vector3 currentPositionR = palmPoseR2.Position;
-
-            if (!gestureInProgress)
-            {
-                startPositionL = currentPositionL;
-                startPositionR = currentPositionR;
-                gestureStartTime = Time.time;
-                gestureInProgress = true;
-            }
-            else
-            {
-                if (Vector3.Distance(startPositionL, currentPositionL) >= gestureDistance &&
-                    Vector3.Distance(startPositionR, currentPositionR) >= gestureDistance)
-                {
-                    if (Time.time - gestureStartTime <= gestureTime)
-                    {
-                        //CloseCube();
-                        Debug.Log("Gesture detected, undoing action");
-                        uIButtonController.UndoLastAction();
-                    }
-                    gestureInProgress = false;
-                }
-                else if (Time.time - gestureStartTime > gestureTime)
-                {
-                    gestureInProgress = false;
-                }
-            }
-            }*/
     }
 
     void OpenCloseMenu()
     {
-        if (viewController.WelcomeScreen != null && viewController.WelcomeScreen.activeSelf)
-        {
-            viewController.IntroductionScreen.SetActive(true);
-            viewController.WelcomeScreen.SetActive(false);
-        }
-        else if (viewController.IntroductionScreen != null && viewController.IntroductionScreen.activeSelf)
-        {
-            viewController.IntroductionScreen.SetActive(false);
-
-            // start image recognition
-            if (viewController.ImageTargetHarbor != null && viewController.ImageTargetDinner != null ) {
-                viewController.ImageTargetHarbor.SetActive(true);
-                viewController.ImageTargetDinner.SetActive(true);
-            } else {
-                Debug.LogWarning("ImageTargetHarbor and/or ImageTargetDinner are empty");
+        if(_introScreensView.GetIntroductionScreens().activeSelf) {
+            if (_introScreensView.GetWelcomePanel().activeSelf)
+            {
+                _introScreensView.SetWelcomePanelActive(false);
+                _introScreensView.SetIntroductionPanel1Active(true);
             }
-           
+            else if (_introScreensView.GetIntroductionPanel1().activeSelf)
+            {
+                _introScreensView.SetIntroductionPanel1Active(false);
+                _introScreensView.SetIntroductionPanel2Active(true);
+            }
+            else if (_introScreensView.GetIntroductionPanel2().activeSelf)
+            {
+                _introScreensView.SetIntroductionPanel2Active(false);
+                _introScreensView.SetIntroductionScreens(false);
+                if(_introScreensView.welcome) {
+                    _viewController.StartImageRecognition();
+                }
+            }
+        } else if (_infoPaintingMenuView.GetPanelActiveState()) {
+            // TODO panels
         }
     }
-
-    /*void CloseCube(){
-        if (gameObject != null)
-        {
-            if (!gameObject.activeSelf) {
-                gameObject.SetActive(true);
-            } else {
-                gameObject.SetActive(false);
-            }
-        }
-        else
-        {
-            Debug.LogWarning("gameObject not assigned.");
-        }
-    }*/
-
     private IEnumerator TouchDelay()
     {
         canDetectSwipe = false;

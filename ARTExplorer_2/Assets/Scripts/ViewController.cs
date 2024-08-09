@@ -1,45 +1,58 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Vuforia;
+using Unity.XR.CoreUtils;
+using Unity.VisualScripting;
 
 public class ViewController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject welcomeScreen;
+    private GameObject _imageTargetHarbor;
     [SerializeField]
-    private GameObject introductionScreen;
+    private GameObject _imageTargetDinner;
     [SerializeField]
-    private GameObject imageTargetHarbor;
+    private GameObject infoButton;
     [SerializeField]
-    private GameObject imageTargetDinner;
+    private GameObject _introductionScreens;
     [SerializeField]
-    private TMP_Text swipeText;
-    private float delay = 2f;
-    
-    public GameObject WelcomeScreen {set; get;}
-    public GameObject IntroductionScreen{set; get;}
-    public GameObject ImageTargetHarbor{set; get;}
-    public GameObject ImageTargetDinner{set; get;}
+    private GameObject _infoScreens;
+
+    private GameObject[] _paintings;
+    private IntroScreensView _introScreensView;
 
     void Start()
     {    
-        WelcomeScreen = welcomeScreen;
-        IntroductionScreen = introductionScreen;
-        ImageTargetHarbor = imageTargetHarbor;
-        ImageTargetDinner = imageTargetDinner;
+        _introScreensView = FindObjectOfType<IntroScreensView>();
+        _paintings = new GameObject[2]{_imageTargetHarbor, _imageTargetDinner};
 
-        swipeText.gameObject.SetActive(false);
-        welcomeScreen.SetActive(true);
-        introductionScreen.SetActive(false);
-        imageTargetDinner.SetActive(false);
-        imageTargetHarbor.SetActive(false);
-
-        StartCoroutine(EnableTextCoroutine());
+        _introductionScreens.SetActive(true);
+        _infoScreens.SetActive(false);
+        foreach (var item in _paintings)
+        {
+            item.SetActive(false);
+        }
+        //StartImageRecognition();
     }
 
-    private IEnumerator EnableTextCoroutine()
-    {
-        yield return new WaitForSeconds(delay); // Wait for the specified delay
-        swipeText.gameObject.SetActive(true); // Enable the text
+    public void StartImageRecognition(){
+        foreach(var painting in _paintings) {
+            painting.SetActive(true);
+            AddInfoButtonToPainting(painting);
+        }
+        _introScreensView.SetIntroductionScreens(false);
+    }
+
+    private void AddInfoButtonToPainting(GameObject painting){
+        GameObject childCopyBtn = Instantiate(infoButton);
+        GameObject infoButtonMenu = childCopyBtn.transform.Find("InfoMenuDetail").gameObject;
+
+        childCopyBtn.transform.SetParent(painting.transform);
+        childCopyBtn.SetActive(true);
+        infoButtonMenu.SetActive(false);
+        childCopyBtn.AddComponent<InfoMenu>();
+        childCopyBtn.transform.name = "InfoBtn";
+        childCopyBtn.transform.localPosition = new Vector3(0.2f, 0, 0);
     }
 }
