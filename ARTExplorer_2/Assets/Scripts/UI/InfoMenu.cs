@@ -13,7 +13,7 @@ public class InfoMenu : MonoBehaviour
     private GameObject _parent;
     private UIMenuController _uIMenuController;
     public List<PaintingInfo> _paintingInfos;
-    private InfoPaintingMenuView _infoMenuView;
+    private PaintingInfoAboutPaintingView _infoMenuView;
     private ViewController _viewController;
 
     void Start()
@@ -23,7 +23,7 @@ public class InfoMenu : MonoBehaviour
         _parentName = _parent.name;
         _menuDetail = gameObject.transform.Find("InfoMenuDetail").gameObject;
         _uIMenuController = FindObjectOfType<UIMenuController>();
-        _infoMenuView = FindObjectOfType<InfoPaintingMenuView>();
+        _infoMenuView = FindObjectOfType<PaintingInfoAboutPaintingView>();
         _viewController = FindObjectOfType<ViewController>();
         LoadJSON();
         //DisplayInfo(_paintingInfos[1]);

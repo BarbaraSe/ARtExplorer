@@ -5,9 +5,9 @@ using System.Collections;
 
 public class GestureWishAway2 : MonoBehaviour
 {
-    public ViewController _viewController;
-    public InfoPaintingMenuView _infoPaintingMenuView;
-    public IntroScreensView _introScreensView;
+    private ViewController _viewController;
+    private PaintingInfoAboutPaintingView _infoPaintingMenuView;
+    private IntroScreensView _introScreensView;
     private float gestureDistance = 0.1f;
     private float gestureTime = 0.5f;
     public float delayDuration = 5.0f;
@@ -106,7 +106,7 @@ public class GestureWishAway2 : MonoBehaviour
                     _viewController.StartImageRecognition();
                 }
             }
-        } else if (_infoPaintingMenuView.InfoPanelState) {
+        } else if (_infoPaintingMenuView.GetPanelActiveState()) {
             // TODO panels
         }
         
