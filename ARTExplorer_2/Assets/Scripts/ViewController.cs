@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Vuforia;
+using Unity.XR.CoreUtils;
 
 public class ViewController : MonoBehaviour
 {
@@ -17,32 +19,29 @@ public class ViewController : MonoBehaviour
     private TMP_Text swipeText;
     [SerializeField]
     private GameObject infoButton;
-     [SerializeField]
-    private GameObject infoButtonMenu;
-
     private float delay = 2f;
     private GameObject[] paintings;
 
     public GameObject WelcomeScreen {set; get;}
     public GameObject IntroductionScreen{set; get;}
 
-    private bool introductionState;
+    public bool IntroductionState {set; get;}
 
     void Start()
     {    
-        introductionState = true;
+        IntroductionState = true;
         WelcomeScreen = welcomeScreen;
         IntroductionScreen = introductionScreen;
         paintings = new GameObject[2]{imageTargetHarbor, imageTargetDinner};
 
+        //welcomeScreen.SetActive(true);
         //swipeText.gameObject.SetActive(false);
-        welcomeScreen.SetActive(true);
         //introductionScreen.SetActive(false);
         //imageTargetDinner.SetActive(false);
         //imageTargetHarbor.SetActive(false);
-        StartImageRecognition();
+        //StartCoroutine(EnableTextCoroutine());
 
-        StartCoroutine(EnableTextCoroutine());
+        StartImageRecognition(); // löschen !!!
     }
 
     public void StartImageRecognition(){
@@ -50,23 +49,20 @@ public class ViewController : MonoBehaviour
             painting.SetActive(true);
             AddInfoButtonToPainting(painting);
         }
-        introductionState = false;
+        IntroductionState = false;
     }
 
     private void AddInfoButtonToPainting(GameObject painting){
         GameObject childCopyBtn = Instantiate(infoButton);
-        GameObject childCopyMenu = Instantiate(infoButtonMenu);
+        GameObject infoButtonMenu = childCopyBtn.transform.Find("InfoMenuDetail").gameObject;
 
         childCopyBtn.transform.SetParent(painting.transform);
-        childCopyMenu.transform.SetParent(painting.transform);
         childCopyBtn.SetActive(true);
-        childCopyMenu.SetActive(false);
+        infoButtonMenu.SetActive(false);
         childCopyBtn.AddComponent<InfoMenu>();
         childCopyBtn.transform.name = "InfoBtn";
-        childCopyMenu.transform.name = "InfoMenuDetail";
-
-        childCopyBtn.transform.localPosition = painting.transform.position + new Vector3(5, 0, 0);
-        
+        childCopyBtn.transform.localPosition = new Vector3(0.5f, 0, 0);
+        //infoButtonMenu.transform.localPosition = new Vector3(0.5f, 0, 0);
     }
 
     private IEnumerator EnableTextCoroutine()
@@ -74,6 +70,4 @@ public class ViewController : MonoBehaviour
         yield return new WaitForSeconds(delay);
         swipeText.gameObject.SetActive(true);
     }
-
-    
 }

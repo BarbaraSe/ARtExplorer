@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InfoMenuView : MonoBehaviour
+public class InfoPaintingMenuView : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text _significance;
@@ -38,6 +38,14 @@ public class InfoMenuView : MonoBehaviour
     private TMP_Text _title4;
     [SerializeField]
     private TMP_Text _detail4;
+
+    
+    public bool InfoPanelState {set; get;}
+
+    void Start()
+    {
+        InfoPanelState = true;
+    }
 
 
     public void SetTextAboutSignificance(string str)

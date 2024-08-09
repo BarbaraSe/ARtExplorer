@@ -1,12 +1,16 @@
 using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.Utilities;
 using UnityEngine;
+using System.Collections;
 
-public class GestureWishAway : MonoBehaviour
+public class GestureWishAway2 : MonoBehaviour
 {
-    public ViewController viewController;
+    public ViewController _viewController;
+    public InfoPaintingMenuView _infoPaintingMenuView;
     private float gestureDistance = 0.1f;
     private float gestureTime = 0.5f;
+    public float delayDuration = 5.0f;
+    private bool canDetectSwipe;
 
     private Vector3 startPositionL;
     private Vector3 startPositionR;
@@ -14,7 +18,7 @@ public class GestureWishAway : MonoBehaviour
     private bool gestureInProgress = false;
 
     void Start(){
-        viewController = FindObjectOfType<ViewController>();
+        _viewController = FindObjectOfType<ViewController>();
     }
 
     void Update()
@@ -31,11 +35,12 @@ public class GestureWishAway : MonoBehaviour
             }
             else
             {
-                if (Vector3.Distance(startPositionL, currentPositionL) >= gestureDistance)
+                if (Vector3.Distance(startPositionL, currentPositionL) >= gestureDistance && canDetectSwipe)
                 {
                     if (Time.time - gestureStartTime <= gestureTime)
                     {
                         OpenCloseMenu();
+                        StartCoroutine(TouchDelay());
                     }
                     gestureInProgress = false;
                 }
@@ -57,11 +62,12 @@ public class GestureWishAway : MonoBehaviour
             }
             else
             {
-                if (Vector3.Distance(startPositionR, currentPositionR) >= gestureDistance)
+                if (Vector3.Distance(startPositionR, currentPositionR) >= gestureDistance && canDetectSwipe)
                 {
                     if (Time.time - gestureStartTime <= gestureTime)
                     {
                         OpenCloseMenu();
+                        StartCoroutine(TouchDelay());
                     }
                     gestureInProgress = false;
                 }
@@ -79,17 +85,29 @@ public class GestureWishAway : MonoBehaviour
 
     void OpenCloseMenu()
     {
-        if (viewController.WelcomeScreen.activeSelf)
-        {
-            viewController.IntroductionScreen.SetActive(true);
-            viewController.WelcomeScreen.SetActive(false);
-        }
-        else if (viewController.IntroductionScreen.activeSelf)
-        {
-            viewController.IntroductionScreen.SetActive(false);
+        if(_viewController.IntroductionState) {
+            if (_viewController.WelcomeScreen.activeSelf)
+            {
+                _viewController.IntroductionScreen.SetActive(true);
+                _viewController.WelcomeScreen.SetActive(false);
+            }
+            else if (_viewController.IntroductionScreen.activeSelf)
+            {
+                _viewController.IntroductionScreen.SetActive(false);
 
-            // start image recognition
-           viewController.StartImageRecognition();
+                // start image recognition
+                _viewController.StartImageRecognition();
+            }
+        } else if (_infoPaintingMenuView.InfoPanelState) {
+            // TODO panels
         }
+        
     }
+
+    private IEnumerator TouchDelay() {
+        canDetectSwipe = false;
+        yield return new WaitForSeconds(delayDuration);
+        canDetectSwipe = true;
+    }
+
 }

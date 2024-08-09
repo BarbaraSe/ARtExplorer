@@ -4,6 +4,7 @@ using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using Microsoft.MixedReality.Toolkit.UI;
 
 public class InfoMenu : MonoBehaviour
 {
@@ -11,51 +12,65 @@ public class InfoMenu : MonoBehaviour
     private string _parentName;
     private GameObject _parent;
     private UIMenuController _uIMenuController;
-    private Vector3 _offsetRight = new Vector3(5, 0, 0);
-    private Vector3 _offsetAbove = new Vector3(0, 10, 0);
     public List<PaintingInfo> _paintingInfos;
-    private InfoMenuView _infoMenuView;
+    private InfoPaintingMenuView _infoMenuView;
+    private ViewController _viewController;
 
     void Start()
     {
+        // gameObject is infoBtn
         _parent = gameObject.transform.parent.gameObject;
         _parentName = _parent.name;
-        _menuDetail = _parent.transform.Find("InfoMenuDetail").gameObject;
+        _menuDetail = gameObject.transform.Find("InfoMenuDetail").gameObject;
         _uIMenuController = FindObjectOfType<UIMenuController>();
-        _infoMenuView = FindObjectOfType<InfoMenuView>();
+        _infoMenuView = FindObjectOfType<InfoPaintingMenuView>();
+        _viewController = FindObjectOfType<ViewController>();
         LoadJSON();
-        DisplayInfo(_paintingInfos[1]);
+        //DisplayInfo(_paintingInfos[1]);
+        AddButtonListeners();
     }
 
-    public void OpenInfoDetailBtnPressed()
+    public void AddButtonListeners(){
+        PressableButton[] buttons = _menuDetail.transform.GetComponentsInChildren<PressableButton>();
+
+        if ( gameObject.GetComponent<PressableButton>() != null)
+        {
+            gameObject.GetComponent<PressableButton>().ButtonPressed.AddListener(OpenInfoDetailMenu);
+        }
+        else
+        {
+            Debug.LogError("Info button component not found!");
+        }
+
+        buttons[0].ButtonPressed.AddListener(GetGeneralInformation);
+        buttons[1].ButtonPressed.AddListener(GetDetailedPaintingInformation);
+        buttons[2].ButtonPressed.AddListener(_uIMenuController.ObjectVisibilityButton);
+    }
+
+    public void OpenInfoDetailMenu()
     {
         if (_menuDetail.activeSelf)
         {
             _menuDetail.SetActive(false);
+            Debug.Log("Info Detail Menu not visible");
         }
         else
         {
             _menuDetail.SetActive(true);
-            PositionPanel(_offsetRight, _menuDetail);
+            Debug.Log("Info Detail Menu visible");
         }
     }
 
-    private void PositionPanel(Vector3 offset, GameObject panel)
+    public void GetGeneralInformation()
     {
-        if (_parent != null && panel != null)
-        {
-            panel.transform.position = _parent.transform.position + offset;
-        }
-    }
-
-    public void GetGeneralInformationBtnPressed()
-    {
+        Debug.Log("Generel Info Button pressed");
         GameObject introductionScreen = GameObject.Find("IntroductionScreen");
         introductionScreen.SetActive(true);
     }
 
-    public void GetPaintingInformationBtnPressed()
+    public void GetDetailedPaintingInformation()
     {
+        Debug.Log("Detailed Info Button pressed");
         if (_parentName.Contains("Dinner"))
         {
             DisplayInfo(_paintingInfos[1]);
