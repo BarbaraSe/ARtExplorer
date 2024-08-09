@@ -17,13 +17,30 @@ public class PaintingInfoStartScreenView : MonoBehaviour
    private PressableButton _funFactsBtn;
    [SerializeField]
    private PressableButton _keyPointsBtn;
+   private PaintingInfoScreensController _paintingInfoScreensController;
+   private PaintingInfoAboutPaintingView _paintingInfoAboutPaintingView;
+   private PaintingInfoPanelView _paintingInfoPanelView;
+   private int index;
+
+   void Update() {
+      _paintingInfoScreensController = FindObjectOfType<PaintingInfoScreensController>();
+      _paintingInfoAboutPaintingView = FindObjectOfType<PaintingInfoAboutPaintingView>();
+      _paintingInfoPanelView = FindObjectOfType<PaintingInfoPanelView>();
+      if (_paintingInfoScreensController._parentName == "ImageTargetHarbour") {
+         index = 0;
+      } else if (_paintingInfoScreensController._parentName == "ImageTargetDinner") {
+         index = 1;
+      }
+   }
 
    public void ShowArtistInfo(){
-
+      
    }
 
    public void ShowPaintingInfo(){
-    
+    _paintingInfoScreensController.SetAboutInfoActive(true);
+    List<AboutPaintingItem> artistInfo = _paintingInfoScreensController._paintingInfos[index].AboutPainting;
+    _paintingInfoAboutPaintingView.SetTextAboutPainting(artistInfo);
    }
    public void ShowEraInfo(){
     

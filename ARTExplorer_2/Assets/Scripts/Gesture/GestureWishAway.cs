@@ -8,6 +8,7 @@ public class GestureWishAway : MonoBehaviour
     private ViewController _viewController;
     private UIMenuController _uIButtonController;
     private PaintingInfoAboutPaintingView _infoPaintingMenuView;
+    private PaintingInfoScreensController _paintingInfoScreensController;
     private IntroScreensView _introScreensView;
     private float gestureDistance = 0.1f;
     private float gestureTime = 0.5f;
@@ -112,8 +113,16 @@ public class GestureWishAway : MonoBehaviour
                     _viewController.StartImageRecognition();
                 }
             }
-        } else if (_infoPaintingMenuView.GetPanelActiveState()) {
-            // TODO panels
+        } else if (_viewController._infoScreens.activeSelf) {
+           if(_paintingInfoScreensController.GetStartInfoPanelActiveStatus()) {
+            _paintingInfoScreensController.SetStartInfoPanelActive(false);
+           } else if (_paintingInfoScreensController.GetAboutInfoActiveStatus()) {
+            _paintingInfoScreensController.SetAboutInfoActive(false);
+            _paintingInfoScreensController.SetStartInfoPanelActive(true);
+           } else if (_paintingInfoScreensController.GetPaintingInfoActiveStatus()) {
+            _paintingInfoScreensController.SetPaintingInfoActive(false);
+            _paintingInfoScreensController.SetStartInfoPanelActive(true);
+           }
         }
     }
     private IEnumerator TouchDelay()

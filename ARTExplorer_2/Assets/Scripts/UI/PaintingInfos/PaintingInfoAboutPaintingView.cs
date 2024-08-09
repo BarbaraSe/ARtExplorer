@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PaintingInfoAboutPaintingView : MonoBehaviour
 {
@@ -20,22 +18,14 @@ public class PaintingInfoAboutPaintingView : MonoBehaviour
     public bool GetPanelActiveState(){
         return _aboutPainting.activeSelf;
     }
-    public void SetTextAboutPainting(List<AboutPaintingItem> aboutPaintingItem)
+    public void SetTextAboutPainting(List<AboutPaintingItem> list)
     {
-        _aboutPainting.SetActive(true);
-        foreach (var item in aboutPaintingItem)
+        foreach (var item in list)
         {
             _title.text = item.Title;
             _artist.text = item.Artist;
             _medium.text = item.Medium;
             _date.text = item.Date;
         }
-    }
-
-    public void SetTextAboutArtist(List<DetailItem> list)
-    {
-        gameObject.SetActive(true);
-
-
     }
 }

@@ -16,11 +16,14 @@ public class PaintingInfoScreensController : MonoBehaviour
     public string _parentName;
     private InfoMenu _infoMenu;
 
-    private void Start() {
-        SetStartInfoPanelActive(true);
+    void Start() {
         LoadJSON();
-        _infoMenu = FindObjectOfType<InfoMenu>();
-        _parentName = _infoMenu.GetParentName();
+    }
+
+    void Update()
+    {
+          _infoMenu = FindObjectOfType<InfoMenu>();
+         _parentName = _infoMenu.GetParentName();
     }
 
 

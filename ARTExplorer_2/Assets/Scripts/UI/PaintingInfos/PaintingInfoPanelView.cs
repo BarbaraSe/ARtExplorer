@@ -29,6 +29,12 @@ public class PaintingInfoPanelView : MonoBehaviour
     [SerializeField]
     private TMP_Text _detail4;
 
+    private PaintingInfoScreensController _paintingInfoScreensController;
+
+    void Update() {
+        _paintingInfoScreensController = FindObjectOfType<PaintingInfoScreensController>();
+    }
+
     public void SetTextAboutSignificance(string str)
     {
 

@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.XR.CoreUtils;
 using UnityEngine;
-using UnityEngine.UI;
-using System.IO;
 using Microsoft.MixedReality.Toolkit.UI;
 
 public class InfoMenu : MonoBehaviour
@@ -14,7 +9,7 @@ public class InfoMenu : MonoBehaviour
     private UIMenuController _uIMenuController;
     private ViewController _viewController;
 
-    void Start()
+    void Update()
     {
         // gameObject is infoBtn
         _parent = gameObject.transform.parent.gameObject;
@@ -22,7 +17,6 @@ public class InfoMenu : MonoBehaviour
         _menuDetail = gameObject.transform.Find("InfoMenuDetail").gameObject;
         _uIMenuController = FindObjectOfType<UIMenuController>();
         _viewController = FindObjectOfType<ViewController>();
-        //DisplayInfo(_paintingInfos[1]);
         AddButtonListeners();
     }
 
@@ -74,10 +68,4 @@ public class InfoMenu : MonoBehaviour
         introductionScreen.SetIntroductionScreens(true);
         introductionScreen.SetIntroductionPanel1Active(true);
     }
-
-
-
-    
-
-   
 }
