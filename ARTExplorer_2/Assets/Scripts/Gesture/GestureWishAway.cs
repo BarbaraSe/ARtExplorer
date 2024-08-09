@@ -117,6 +117,7 @@ public class GestureWishAway : MonoBehaviour
         } else if (_viewController._infoScreens.activeSelf) {
            if(_paintingInfoScreensController.GetStartInfoPanelActiveStatus()) {
             _paintingInfoScreensController.SetStartInfoPanelActive(false);
+            _viewController.SetIntroductionScreensActive(false);
            } else if (_paintingInfoScreensController.GetAboutInfoActiveStatus()) {
             _paintingInfoScreensController.SetAboutInfoActive(false);
             _paintingInfoScreensController.SetStartInfoPanelActive(true);

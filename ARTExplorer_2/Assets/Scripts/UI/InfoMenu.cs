@@ -8,6 +8,7 @@ public class InfoMenu : MonoBehaviour
     private GameObject _parent;
     private UIMenuController _uIMenuController;
     private ViewController _viewController;
+    private PaintingInfoScreensController _paintingInfoScreenController;
 
     void Update()
     {
@@ -32,7 +33,7 @@ public class InfoMenu : MonoBehaviour
         if (item.name == "GeneralInfo") {
             item.ButtonPressed.AddListener(GetGeneralInformation);
         } else if (item.name == "PaintingInfo") {
-            item.ButtonPressed.AddListener(_viewController.SetInfoScreensActive);
+            item.ButtonPressed.AddListener(OpenPaintingInfos);
         } else if (item.name == "Hide3DBtn") {
             item.ButtonPressed.AddListener(_uIMenuController.ObjectVisibilityButton);
         }
@@ -46,6 +47,13 @@ public class InfoMenu : MonoBehaviour
         {
             Debug.LogError("Info button component not found!");
         }
+    }
+
+    public void OpenPaintingInfos(){
+        _viewController.SetInfoScreensActive();
+        _paintingInfoScreenController.SetAboutInfoActive(false);
+        _paintingInfoScreenController.SetStartInfoPanelActive(true);
+        _paintingInfoScreenController.SetPaintingInfoActive(false);
     }
 
     public void OpenInfoDetailMenu()
@@ -64,8 +72,10 @@ public class InfoMenu : MonoBehaviour
 
     public void GetGeneralInformation()
     {
-        IntroScreensView introductionScreen = GameObject.Find("IntroductionScreens").GetComponent<IntroScreensView>();
-        introductionScreen.SetIntroductionScreens(true);
+        _viewController.SetIntroductionScreensActive(true);
+        IntroScreensView introductionScreen = _viewController.GetIntroductionScreen().GetComponent<IntroScreensView>();
+       // IntroScreensView introductionScreen = GameObject.Find("IntroductionScreens").GetComponent<IntroScreensView>();
+        //introductionScreen.SetIntroductionScreens(true);
         introductionScreen.SetIntroductionPanel1Active(true);
     }
 }

@@ -40,6 +40,14 @@ public class ViewController : MonoBehaviour
         _infoScreens.SetActive(true);
     }
 
+    public void SetIntroductionScreensActive(bool active){
+        _introductionScreens.SetActive(active);
+    }
+
+    public GameObject GetIntroductionScreen(){
+        return _introductionScreens;
+    }
+
     public void StartImageRecognition(){
         foreach(var painting in _paintings) {
             painting.SetActive(true);
