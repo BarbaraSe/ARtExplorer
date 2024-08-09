@@ -4,52 +4,40 @@ using UnityEngine;
 using TMPro;
 using Vuforia;
 using Unity.XR.CoreUtils;
+using Unity.VisualScripting;
 
 public class ViewController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject welcomeScreen;
+    private GameObject _imageTargetHarbor;
     [SerializeField]
-    private GameObject introductionScreen;
-    [SerializeField]
-    private GameObject imageTargetHarbor;
-    [SerializeField]
-    private GameObject imageTargetDinner;
-    [SerializeField]
-    private TMP_Text swipeText;
+    private GameObject _imageTargetDinner;
     [SerializeField]
     private GameObject infoButton;
-    private float delay = 2f;
-    private GameObject[] paintings;
 
-    public GameObject WelcomeScreen {set; get;}
-    public GameObject IntroductionScreen{set; get;}
-
-    public bool IntroductionState {set; get;}
+    private GameObject[] _paintings;
+    private IntroScreensView _introScreensView;
 
     void Start()
     {    
-        IntroductionState = true;
-        WelcomeScreen = welcomeScreen;
-        IntroductionScreen = introductionScreen;
-        paintings = new GameObject[2]{imageTargetHarbor, imageTargetDinner};
+        _introScreensView = FindObjectOfType<IntroScreensView>();
+        _paintings = new GameObject[2]{_imageTargetHarbor, _imageTargetDinner};
 
-        //welcomeScreen.SetActive(true);
-        //swipeText.gameObject.SetActive(false);
-        //introductionScreen.SetActive(false);
-        //imageTargetDinner.SetActive(false);
-        //imageTargetHarbor.SetActive(false);
-        //StartCoroutine(EnableTextCoroutine());
+        _introScreensView.StartExperience();
+        foreach (var item in _paintings)
+        {
+            item.SetActive(false);
+        }
 
-        StartImageRecognition(); // löschen !!!
+        //StartImageRecognition(); // löschen !!!
     }
 
     public void StartImageRecognition(){
-        foreach(var painting in paintings) {
+        foreach(var painting in _paintings) {
             painting.SetActive(true);
             AddInfoButtonToPainting(painting);
         }
-        IntroductionState = false;
+        _introScreensView.SetIntroductionScreens(false);
     }
 
     private void AddInfoButtonToPainting(GameObject painting){
@@ -62,12 +50,5 @@ public class ViewController : MonoBehaviour
         childCopyBtn.AddComponent<InfoMenu>();
         childCopyBtn.transform.name = "InfoBtn";
         childCopyBtn.transform.localPosition = new Vector3(0.5f, 0, 0);
-        //infoButtonMenu.transform.localPosition = new Vector3(0.5f, 0, 0);
-    }
-
-    private IEnumerator EnableTextCoroutine()
-    {
-        yield return new WaitForSeconds(delay);
-        swipeText.gameObject.SetActive(true);
     }
 }

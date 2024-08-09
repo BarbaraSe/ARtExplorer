@@ -7,6 +7,7 @@ public class GestureWishAway2 : MonoBehaviour
 {
     public ViewController _viewController;
     public InfoPaintingMenuView _infoPaintingMenuView;
+    public IntroScreensView _introScreensView;
     private float gestureDistance = 0.1f;
     private float gestureTime = 0.5f;
     public float delayDuration = 5.0f;
@@ -19,6 +20,7 @@ public class GestureWishAway2 : MonoBehaviour
 
     void Start(){
         _viewController = FindObjectOfType<ViewController>();
+        _introScreensView = FindObjectOfType<IntroScreensView>();
     }
 
     void Update()
@@ -85,17 +87,21 @@ public class GestureWishAway2 : MonoBehaviour
 
     void OpenCloseMenu()
     {
-        if(_viewController.IntroductionState) {
-            if (_viewController.WelcomeScreen.activeSelf)
+        if(_introScreensView.GetIntroductionScreens().activeSelf) {
+            if (_introScreensView.GetWelcomePanel().activeSelf)
             {
-                _viewController.IntroductionScreen.SetActive(true);
-                _viewController.WelcomeScreen.SetActive(false);
+                _introScreensView.SetWelcomePanelActive(false);
+                _introScreensView.SetIntroductionPanel1Active(true);
             }
-            else if (_viewController.IntroductionScreen.activeSelf)
+            else if (_introScreensView.GetIntroductionPanel1().activeSelf)
             {
-                _viewController.IntroductionScreen.SetActive(false);
-
-                // start image recognition
+                _introScreensView.SetIntroductionPanel1Active(false);
+                _introScreensView.SetIntroductionPanel2Active(true);
+            }
+            else if (_introScreensView.GetIntroductionPanel2().activeSelf)
+            {
+                _introScreensView.SetIntroductionPanel2Active(false);
+                _introScreensView.SetIntroductionScreens(false);
                 _viewController.StartImageRecognition();
             }
         } else if (_infoPaintingMenuView.InfoPanelState) {
