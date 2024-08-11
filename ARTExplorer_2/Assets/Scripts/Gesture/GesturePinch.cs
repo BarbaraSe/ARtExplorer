@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class GesturePinch : MonoBehaviour
 {
-    public GameObject menu; 
-    public float activationDistance = 0.02f; 
-
+    public GameObject menu;
+    public float activationDistance = 0.02f;
     private bool isMenuOpen = false;
 
     void Update()
@@ -25,10 +24,13 @@ public class GesturePinch : MonoBehaviour
 
     void OpenCloseMenu()
     {
-        if (!isMenuOpen) {
+        if (!isMenuOpen)
+        {
             menu.SetActive(true);
             isMenuOpen = true;
-        } else {
+        }
+        else
+        {
             menu.SetActive(false);
             isMenuOpen = false;
         }

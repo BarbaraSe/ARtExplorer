@@ -18,25 +18,7 @@ public class InfoDetailMenu : MonoBehaviour
         _menuDetail = gameObject.transform.Find("InfoMenuDetail").gameObject;
         _uIMenuController = FindObjectOfType<UIMenuController>();
         _viewController = FindObjectOfType<ViewController>();
-
         AddButtonListeners();
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            OpenInfoDetailMenu();
-        }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            GetGeneralInformation();
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            OpenPaintingInfos();
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            _uIMenuController.ObjectVisibilityButton();
-        }
     }
 
     public string GetParentName()
@@ -96,11 +78,8 @@ public class InfoDetailMenu : MonoBehaviour
 
     public void GetGeneralInformation()
     {
-        // _viewController.SetIntroductionScreensActive(true);
-        //IntroScreensView introductionScreen = FindObjectOfType<IntroScreensView>();
         _viewController.SetIntroductionScreensActive(true);
         IntroScreensView introductionScreen = GameObject.Find("IntroductionScreens").GetComponent<IntroScreensView>();
-        // IntroScreensView introductionScreen = _viewController.GetIntroductionScreen().GetComponent<IntroScreensView>();
         introductionScreen.SetIntroductionPanel1Active(true);
     }
 }

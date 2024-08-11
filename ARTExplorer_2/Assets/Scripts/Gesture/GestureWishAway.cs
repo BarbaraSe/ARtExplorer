@@ -6,10 +6,7 @@ using UnityEngine;
 public class GestureWishAway : MonoBehaviour
 {
     private ViewController _viewController;
-    private UIMenuController _uIButtonController;
-    // private PaintingInfoAboutPaintingView _infoPaintingMenuView;
     private PaintingInfoScreensController _paintingInfoScreensController;
-    // private PaintingInfoPanelView _paintingInfoPanelView;
     private IntroScreensView _introScreensView;
     private float gestureDistance = 0.1f;
     private float gestureTime = 0.5f;
@@ -25,9 +22,7 @@ public class GestureWishAway : MonoBehaviour
     void Start()
     {
         _viewController = FindObjectOfType<ViewController>();
-        _uIButtonController = FindObjectOfType<UIMenuController>();
         _introScreensView = FindObjectOfType<IntroScreensView>();
-        // _paintingInfoPanelView = FindObjectOfType<PaintingInfoPanelView>();
         _paintingInfoScreensController = FindObjectOfType<PaintingInfoScreensController>();
     }
 
@@ -130,14 +125,11 @@ public class GestureWishAway : MonoBehaviour
             {
                 _paintingInfoScreensController.SetAboutInfoActive(false);
                 _paintingInfoScreensController.SetStartScreenInfoActive(true);
-                // _paintingInfoScreensController.GetStartScreenInfoPanel().GetComponent<PaintingInfoStartScreenView>().SetAllItemsFalse();
-                // _paintingInfoPanelView.SetAllItemsFalse();
             }
             else if (_paintingInfoScreensController.GetPaintingInfo().activeSelf)
             {
                 _paintingInfoScreensController.SetPaintingInfoActive(false);
                 _paintingInfoScreensController.SetStartScreenInfoActive(true);
-                // _paintingInfoScreensController.GetStartScreenInfoPanel().GetComponent<PaintingInfoStartScreenView>().SetAllItemsFalse();
             }
         }
     }

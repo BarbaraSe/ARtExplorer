@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
@@ -18,9 +17,6 @@ public class PaintingInfoStartScreenView : MonoBehaviour
    [SerializeField]
    private PressableButton _keyPointsBtn;
    private PaintingInfoScreensController _paintingInfoScreensController;
-   // private PaintingInfoAboutPaintingView _paintingInfoAboutPaintingView;
-   // private PaintingInfoPanelView _paintingInfoPanelView;
-   private ViewController _viewController;
    private int index;
 
    [SerializeField]
@@ -33,7 +29,6 @@ public class PaintingInfoStartScreenView : MonoBehaviour
    private TMP_Text _medium;
    [SerializeField]
    private TMP_Text _date;
-
    [SerializeField]
    private TMP_Text _significance;
    [SerializeField]
@@ -60,20 +55,9 @@ public class PaintingInfoStartScreenView : MonoBehaviour
    private TMP_Text[] titles;
    private TMP_Text[] details;
 
-   private void Start()
-   {
-      // titles = new TMP_Text[4] { _title1, _title2, _title3, _title4 };
-      // titles = new TMP_Text[4] { _detail1, _detail2, _detail3, _detail4 };
-   }
-
    void Update()
    {
       _paintingInfoScreensController = FindObjectOfType<PaintingInfoScreensController>();
-      _viewController = GetComponent<ViewController>();
-      // _paintingInfoPanelView = GetComponent<PaintingInfoPanelView>();
-      // _paintingInfoAboutPaintingView = _paintingInfoScreensController.GetAboutInfo().GetComponent<PaintingInfoAboutPaintingView>();
-
-
       if (_paintingInfoScreensController.GetParentName() == "ImageTargetHarbour")
       {
          index = 0;
@@ -86,8 +70,6 @@ public class PaintingInfoStartScreenView : MonoBehaviour
       {
          index = 0;
       }
-
-
    }
 
    public void ShowArtistInfo()
@@ -96,10 +78,7 @@ public class PaintingInfoStartScreenView : MonoBehaviour
       {
          _paintingInfoScreensController.SetStartScreenInfoActive(false);
          _paintingInfoScreensController.SetAboutInfoActive(true);
-
-         List<DetailItem> artistInfo = _paintingInfoScreensController._paintingInfos[index].AboutArtist;
-         // _paintingInfoPanelView.SetText(artistInfo);
-         SetTextInInfoPanel(artistInfo);
+         SetTextInInfoPanel(_paintingInfoScreensController._paintingInfos[index].AboutArtist);
          SetInfoPanelHeader("About the Artist");
       }
    }
@@ -108,8 +87,6 @@ public class PaintingInfoStartScreenView : MonoBehaviour
    {
       _paintingInfoScreensController.SetStartScreenInfoActive(false);
       _paintingInfoScreensController.SetPaintingInfoActive(true);
-
-      //  _paintingInfoAboutPaintingView.SetTextAboutPainting(_paintingInfoScreensController._paintingInfos[index].AboutPainting);
       SetTextAboutPainting(_paintingInfoScreensController._paintingInfos[index].AboutPainting);
    }
    public void ShowEraInfo()
@@ -118,7 +95,6 @@ public class PaintingInfoStartScreenView : MonoBehaviour
       {
          _paintingInfoScreensController.SetStartScreenInfoActive(false);
          _paintingInfoScreensController.SetAboutInfoActive(true);
-         // _paintingInfoPanelView = FindObjectOfType<PaintingInfoPanelView>();
          SetTextInInfoPanel(_paintingInfoScreensController._paintingInfos[index].AboutEra);
          SetInfoPanelHeader("About Era");
       }
@@ -129,7 +105,6 @@ public class PaintingInfoStartScreenView : MonoBehaviour
       {
          _paintingInfoScreensController.SetStartScreenInfoActive(false);
          _paintingInfoScreensController.SetAboutInfoActive(true);
-         // _paintingInfoPanelView = FindObjectOfType<PaintingInfoPanelView>();
          SetTextAboutSignificance(_paintingInfoScreensController._paintingInfos[index].Significance);
       }
    }
@@ -139,7 +114,6 @@ public class PaintingInfoStartScreenView : MonoBehaviour
       {
          _paintingInfoScreensController.SetStartScreenInfoActive(false);
          _paintingInfoScreensController.SetAboutInfoActive(true);
-         // _paintingInfoPanelView = FindObjectOfType<PaintingInfoPanelView>();
          SetTextInInfoPanel(_paintingInfoScreensController._paintingInfos[index].FunFacts);
          SetInfoPanelHeader("Fun Facts");
       }
@@ -150,11 +124,12 @@ public class PaintingInfoStartScreenView : MonoBehaviour
       {
          _paintingInfoScreensController.SetStartScreenInfoActive(false);
          _paintingInfoScreensController.SetAboutInfoActive(true);
-         // _paintingInfoPanelView = FindObjectOfType<PaintingInfoPanelView>();
          SetTextInInfoPanel(_paintingInfoScreensController._paintingInfos[index].KeyPointsEra);
          SetInfoPanelHeader("Key Points about Era");
       }
    }
+
+   // Info About Painting
    public void SetTextAboutPainting(AboutPaintingItem list)
    {
       Debug.Log($"{list.Title}: {list.Artist}: {list.Medium}: {list.Date}");
@@ -195,7 +170,6 @@ public class PaintingInfoStartScreenView : MonoBehaviour
 
    public void SetTextInInfoPanel(List<DetailItem> list)
    {
-
       titles = new TMP_Text[3] { _title1, _title2, _title3 };
       details = new TMP_Text[3] { _detail1, _detail2, _detail3 };
       SetAllItemsFalse();
@@ -210,14 +184,8 @@ public class PaintingInfoStartScreenView : MonoBehaviour
             Debug.LogWarning("No Information available");
             SetInfoPanelHeader("No Information available");
          }
-         // else if (list.Count == 1)
-         // {
-         //    _title1.text = item.Title;
-         //    _detail1.text = item.Title;
-         // }
-         else// if (list.Count > 1)
+         else
          {
-
             if (idx < 3)
             {
                titles[idx].text = item.Title;
@@ -228,6 +196,5 @@ public class PaintingInfoStartScreenView : MonoBehaviour
             }
          }
       }
-
    }
 }

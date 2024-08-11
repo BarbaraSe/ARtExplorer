@@ -2,22 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
-using Vuforia;
-using Unity.XR.CoreUtils;
-using Unity.VisualScripting;
 
 public class UIMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject[] objects3D;
-
     private GameObject selectedObject;
-
     private Dictionary<string, TransformData> initialTransforms;
     private Dictionary<string, TransformData> recentTransforms;
-
     private bool initialTransformsUpdated = false;
     private bool isTargetTracked = false;
-    private ViewController _viewController;
 
     private struct TransformData
     {
@@ -26,7 +19,6 @@ public class UIMenuController : MonoBehaviour
         public Vector3 Scale { get; }
         public GameObject GameObject { get; }
         public Transform Transform => GameObject.transform;
-
         public TransformData(GameObject gameObject)
         {
             Position = gameObject.transform.position;
@@ -38,7 +30,6 @@ public class UIMenuController : MonoBehaviour
 
     void Start()
     {
-        _viewController = FindObjectOfType<ViewController>();
         initialTransforms = new Dictionary<string, TransformData>();
         recentTransforms = new Dictionary<string, TransformData>();
 
@@ -47,7 +38,6 @@ public class UIMenuController : MonoBehaviour
             GameObject obj = objects3D[i];
             string identifier = obj.name;
             initialTransforms[identifier] = new TransformData(obj);
-
             var objectManipulator = obj.GetComponent<ObjectManipulator>();
             objectManipulator.OnManipulationStarted.AddListener(OnManipulationStarted);
             objectManipulator.OnManipulationEnded.AddListener(OnManipulationEnded);
@@ -71,7 +61,7 @@ public class UIMenuController : MonoBehaviour
 
     public void TargetLost()
     {
-        Debug.Log("Womp Womp");
+        Debug.Log("Target Lost");
     }
 
     private void OnManipulationStarted(ManipulationEventData eventData)

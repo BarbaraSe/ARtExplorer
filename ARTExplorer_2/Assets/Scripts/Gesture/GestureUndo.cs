@@ -5,20 +5,18 @@ using System.Collections;
 
 public class GestureUndo : MonoBehaviour
 {
-    public GameObject gameObject; 
     private Vector3 pinkyTipRStart;
     private Vector3 pinkyKnuckleRStart;
     private Vector3 palmRStart;
     private Vector3 pinkyTipLStart;
     private Vector3 pinkyKnuckleLStart;
-    private Vector3 palmLStart;
     private bool initialMovementDone = false;
     private bool handsMovedApart = false;
     private bool fingerTouching = false;
 
     public float separationDistance = 0.2f;
     public float closingDistance = 0.01f;
-    public float gestureTime = 0.05f;   
+    public float gestureTime = 0.05f;
 
     private float gestureStartTime;
     private int countGesture;
@@ -27,10 +25,9 @@ public class GestureUndo : MonoBehaviour
     {
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Right, out MixedRealityPose pinkyTipR) &&
             HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyKnuckle, Handedness.Right, out MixedRealityPose pinkyKnuckleR) &&
-            HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Left, out MixedRealityPose pinkyTipL) && 
+            HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Left, out MixedRealityPose pinkyTipL) &&
             HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyKnuckle, Handedness.Left, out MixedRealityPose pinkyKnuckleL))
         {
-
             Debug.Log($"Start Left {pinkyTipL.Position} Start Right {pinkyTipR.Position}");
 
             if (!initialMovementDone)
@@ -51,7 +48,8 @@ public class GestureUndo : MonoBehaviour
 
                 Debug.Log($"Init Distance {initDistancePinkyTip} currentDistancePinkyTip {pinkyTipR.Position}");
                 if (!fingerTouching && Mathf.Abs(currentDistancePinkyTip - initDistancePinkyTip) < closingDistance &&
-                    Mathf.Abs(currentDistancePinkyKnuckle - initDistancePinkyKnuckle) < closingDistance){
+                    Mathf.Abs(currentDistancePinkyKnuckle - initDistancePinkyKnuckle) < closingDistance)
+                {
                     fingerTouching = true;
                 }
 
@@ -60,29 +58,31 @@ public class GestureUndo : MonoBehaviour
                 {
                     handsMovedApart = true;
                     Debug.LogWarning("Hands moved apart");
-                
+
                     if (Time.time - gestureStartTime <= gestureTime)
                     {
                         CompleteGesture();
                     }
-                } 
+                }
 
                 if (fingerTouching && !handsMovedApart && Time.time - gestureStartTime > gestureTime)
                 {
                     ResetGesture();
                 }
             }
-        }    
-
+        }
     }
 
     void CompleteGesture()
     {
         if (gameObject != null)
         {
-            if (!gameObject.activeSelf) {
+            if (!gameObject.activeSelf)
+            {
                 gameObject.SetActive(true);
-            } else {
+            }
+            else
+            {
                 gameObject.SetActive(false);
             }
         }
@@ -106,6 +106,6 @@ public class GestureUndo : MonoBehaviour
 
     private IEnumerator WaitAndExecute()
     {
-        yield return new WaitForSeconds(2f);  
+        yield return new WaitForSeconds(2f);
     }
 }

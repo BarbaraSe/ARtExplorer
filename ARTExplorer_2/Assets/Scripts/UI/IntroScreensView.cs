@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class IntroScreensView : MonoBehaviour
 {
-    // [SerializeField]
-    // private GameObject _introductionScreens;
-
     [SerializeField]
     private GameObject _welcomePanel;
 
@@ -16,7 +13,7 @@ public class IntroScreensView : MonoBehaviour
     private GameObject _introductionPanel2;
     [SerializeField]
     private GameObject _swipeText;
-    private float delay = 2f;
+    public float delay = 2f;
     public bool welcome;
 
     void Start()
@@ -29,9 +26,6 @@ public class IntroScreensView : MonoBehaviour
         StartCoroutine(EnableTextCoroutine());
     }
 
-    // public GameObject GetIntroductionScreens(){
-    //    return _introductionScreens;
-    // }
     public GameObject GetWelcomePanel()
     {
         return _welcomePanel;
@@ -44,9 +38,6 @@ public class IntroScreensView : MonoBehaviour
     {
         return _introductionPanel2;
     }
-    // public void SetIntroductionScreens(bool active){
-    //     _introductionScreens.SetActive(active);
-    // }
 
     public void SetWelcomePanelActive(bool active)
     {
@@ -71,5 +62,4 @@ public class IntroScreensView : MonoBehaviour
         yield return new WaitForSeconds(delay);
         _swipeText.gameObject.SetActive(true);
     }
-
 }

@@ -1,14 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using System.IO;
 using Newtonsoft.Json;
 
 public class PaintingInfoScreensController : MonoBehaviour
 {
-    // [SerializeField]
-    // private GameObject _paintingInfoScreens;
     [SerializeField]
     private GameObject _startScreenInfoPanel;
     [SerializeField]
@@ -18,12 +14,10 @@ public class PaintingInfoScreensController : MonoBehaviour
     private string _parentName;
     public List<PaintingInfo> _paintingInfos;
     private InfoDetailMenu _infoMenu;
-    private ViewController _viewController;
 
     void Start()
     {
         LoadJSON();
-        _viewController = FindObjectOfType<ViewController>();
     }
 
     void Update()

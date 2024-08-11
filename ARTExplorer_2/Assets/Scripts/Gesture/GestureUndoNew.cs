@@ -13,14 +13,14 @@ public class GestureUndoNew : MonoBehaviour
     private bool canDetectPinkyTouch = true;
     private bool canDetectClap = true;
 
-   
+
     void Update()
     {
         // Detect pinky
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Left, out MixedRealityPose leftPinkyPose) &&
             HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Right, out MixedRealityPose rightPinkyPose))
         {
-            
+
             float pinkyDistance = Vector3.Distance(leftPinkyPose.Position, rightPinkyPose.Position);
             if (pinkyDistance < pinkyTouchThreshold && canDetectPinkyTouch)
             {

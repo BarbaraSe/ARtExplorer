@@ -54,7 +54,6 @@ public class ViewController : MonoBehaviour
             painting.SetActive(true);
             AddInfoButtonToPainting(painting);
         }
-        // _introScreensView.SetIntroductionScreens(false);
         SetIntroductionScreensActive(false);
     }
 

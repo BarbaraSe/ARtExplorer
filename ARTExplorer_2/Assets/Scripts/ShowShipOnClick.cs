@@ -13,7 +13,7 @@ public class ShowShipOnClick : MonoBehaviour, IMixedRealityPointerHandler
         }
         else
         {
-            UnityEngine.Debug.LogError("shipObject is not assigned.");
+            Debug.LogError("shipObject is not assigned.");
         }
     }
 
@@ -22,11 +22,11 @@ public class ShowShipOnClick : MonoBehaviour, IMixedRealityPointerHandler
         if (shipObject != null)
         {
             shipObject.SetActive(!shipObject.activeSelf);
-            UnityEngine.Debug.Log("Ship visibility toggled.");
+            Debug.Log("Ship visibility toggled.");
         }
         else
         {
-            UnityEngine.Debug.LogError("shipObject is not assigned.");
+            Debug.LogError("shipObject is not assigned.");
         }
     }
 
