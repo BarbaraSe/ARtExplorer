@@ -11,9 +11,9 @@ public class ViewController : MonoBehaviour
     [SerializeField]
     private GameObject _imageTargetHarbor;
     [SerializeField]
-    private GameObject _imageTargetDinner;
+    public GameObject _imageTargetDinner;
     [SerializeField]
-    private GameObject infoButton;
+    public GameObject infoButton;
     [SerializeField]
     private GameObject _introductionScreens;
     [SerializeField]

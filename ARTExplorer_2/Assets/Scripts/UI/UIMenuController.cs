@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
 using Vuforia;
+using Unity.XR.CoreUtils;
+using Unity.VisualScripting;
 
 public class UIMenuController : MonoBehaviour
 {
@@ -15,6 +17,7 @@ public class UIMenuController : MonoBehaviour
 
     private bool initialTransformsUpdated = false;
     private bool isTargetTracked = false;
+    private ViewController _viewController;
 
     private struct TransformData
     {
@@ -35,6 +38,7 @@ public class UIMenuController : MonoBehaviour
 
     void Start()
     {
+        _viewController = FindObjectOfType<ViewController>();
         initialTransforms = new Dictionary<string, TransformData>();
         recentTransforms = new Dictionary<string, TransformData>();
 
@@ -158,12 +162,11 @@ public class UIMenuController : MonoBehaviour
     {
         foreach (var keyValue in initialTransforms)
         {
-            keyValue.Value.GameObject.SetActive(!keyValue.Value.GameObject.activeSelf);
-            Debug.Log(keyValue.Value.GameObject.activeSelf ? "Enable Object Visibility" : "Disable Object Visibility");
+            if (keyValue.Key != "InfoBtn" && keyValue.Key != "InfoMenuDetail")
+            {
+                keyValue.Value.GameObject.SetActive(!keyValue.Value.GameObject.activeSelf);
+                Debug.Log(keyValue.Value.GameObject.activeSelf ? "Enable Object Visibility" : "Disable Object Visibility");
+            }
         }
     }
-
-    public void GetGeneralInformationBtnPressed() { }
-
-    public void GetPaintingInformationBtnPressed() { }
 }
