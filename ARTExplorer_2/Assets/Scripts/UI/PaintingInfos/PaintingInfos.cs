@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class PaintingInfo
 {
     public string Significance;
-    public List<AboutPaintingItem> AboutPainting;
+    public AboutPaintingItem AboutPainting;
     public List<DetailItem> AboutArtist;
     public List<DetailItem> AboutEra;
     public List<DetailItem> FunFacts;
@@ -27,8 +27,8 @@ public class AboutPaintingItem
     public string Date;
 }
 
-    [System.Serializable]
-    public class Wrapper
-    {
-        public List<PaintingInfo> Paintings;
-    }
+[System.Serializable]
+public class PaintingListWrapper
+{
+    public List<PaintingInfo> Paintings;
+}

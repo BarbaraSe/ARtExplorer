@@ -1,7 +1,7 @@
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
 
-public class InfoMenu : MonoBehaviour
+public class InfoDetailMenu : MonoBehaviour
 {
     private GameObject _menuDetail;
     private string _parentName;
@@ -18,6 +18,7 @@ public class InfoMenu : MonoBehaviour
         _menuDetail = gameObject.transform.Find("InfoMenuDetail").gameObject;
         _uIMenuController = FindObjectOfType<UIMenuController>();
         _viewController = FindObjectOfType<ViewController>();
+
         AddButtonListeners();
 
         if (Input.GetKeyDown(KeyCode.I))
@@ -74,9 +75,10 @@ public class InfoMenu : MonoBehaviour
 
     public void OpenPaintingInfos()
     {
-        _viewController.SetInfoScreensActive();
+        _viewController.SetInfoScreensActive(true);
+        _paintingInfoScreenController = _viewController.GetInfoScreensCanvas().GetComponent<PaintingInfoScreensController>();
+        _paintingInfoScreenController.SetStartScreenInfoActive(true);
         _paintingInfoScreenController.SetAboutInfoActive(false);
-        _paintingInfoScreenController.SetStartInfoPanelActive(true);
         _paintingInfoScreenController.SetPaintingInfoActive(false);
     }
 
@@ -85,21 +87,20 @@ public class InfoMenu : MonoBehaviour
         if (_menuDetail.activeSelf)
         {
             _menuDetail.SetActive(false);
-            Debug.Log("Info Detail Menu not visible");
         }
         else
         {
             _menuDetail.SetActive(true);
-            Debug.Log("Info Detail Menu visible");
         }
     }
 
     public void GetGeneralInformation()
     {
+        // _viewController.SetIntroductionScreensActive(true);
+        //IntroScreensView introductionScreen = FindObjectOfType<IntroScreensView>();
         _viewController.SetIntroductionScreensActive(true);
-        IntroScreensView introductionScreen = _viewController.GetIntroductionScreen().GetComponent<IntroScreensView>();
-        // IntroScreensView introductionScreen = GameObject.Find("IntroductionScreens").GetComponent<IntroScreensView>();
-        //introductionScreen.SetIntroductionScreens(true);
+        IntroScreensView introductionScreen = GameObject.Find("IntroductionScreens").GetComponent<IntroScreensView>();
+        // IntroScreensView introductionScreen = _viewController.GetIntroductionScreen().GetComponent<IntroScreensView>();
         introductionScreen.SetIntroductionPanel1Active(true);
     }
 }

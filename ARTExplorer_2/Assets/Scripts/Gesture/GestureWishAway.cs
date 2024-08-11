@@ -7,9 +7,9 @@ public class GestureWishAway : MonoBehaviour
 {
     private ViewController _viewController;
     private UIMenuController _uIButtonController;
-    private PaintingInfoAboutPaintingView _infoPaintingMenuView;
+    // private PaintingInfoAboutPaintingView _infoPaintingMenuView;
     private PaintingInfoScreensController _paintingInfoScreensController;
-    private PaintingInfoPanelView _paintingInfoPanelView;
+    // private PaintingInfoPanelView _paintingInfoPanelView;
     private IntroScreensView _introScreensView;
     private float gestureDistance = 0.1f;
     private float gestureTime = 0.5f;
@@ -22,11 +22,13 @@ public class GestureWishAway : MonoBehaviour
 
     private bool canDetectSwipe = true;
 
-    void Start(){
+    void Start()
+    {
         _viewController = FindObjectOfType<ViewController>();
         _uIButtonController = FindObjectOfType<UIMenuController>();
         _introScreensView = FindObjectOfType<IntroScreensView>();
-        _paintingInfoPanelView = FindObjectOfType<PaintingInfoPanelView>();
+        // _paintingInfoPanelView = FindObjectOfType<PaintingInfoPanelView>();
+        _paintingInfoScreensController = FindObjectOfType<PaintingInfoScreensController>();
     }
 
     void Update()
@@ -71,7 +73,7 @@ public class GestureWishAway : MonoBehaviour
             }
             else
             {
-                if (Vector3.Distance(startPositionR, currentPositionR) >= gestureDistance &&  canDetectSwipe)
+                if (Vector3.Distance(startPositionR, currentPositionR) >= gestureDistance && canDetectSwipe)
                 {
                     if (Time.time - gestureStartTime <= gestureTime)
                     {
@@ -95,7 +97,8 @@ public class GestureWishAway : MonoBehaviour
 
     void OpenCloseMenu()
     {
-        if(_introScreensView.GetIntroductionScreens().activeSelf) {
+        if (_viewController.GetIntroductionScreen().activeSelf)
+        {
             if (_introScreensView.GetWelcomePanel().activeSelf)
             {
                 _introScreensView.SetWelcomePanelActive(false);
@@ -109,24 +112,33 @@ public class GestureWishAway : MonoBehaviour
             else if (_introScreensView.GetIntroductionPanel2().activeSelf)
             {
                 _introScreensView.SetIntroductionPanel2Active(false);
-                _introScreensView.SetIntroductionScreens(false);
-                if(_introScreensView.welcome) {
+                _viewController.SetIntroductionScreensActive(false);
+                if (_introScreensView.welcome)
+                {
                     _viewController.StartImageRecognition();
                 }
+                _introScreensView.welcome = false;
             }
-        } else if (_viewController._infoScreens.activeSelf) {
-           if(_paintingInfoScreensController.GetStartInfoPanelActiveStatus()) {
-            _paintingInfoScreensController.SetStartInfoPanelActive(false);
-            _viewController.SetIntroductionScreensActive(false);
-           } else if (_paintingInfoScreensController.GetAboutInfoActiveStatus()) {
-            _paintingInfoScreensController.SetAboutInfoActive(false);
-            _paintingInfoScreensController.SetStartInfoPanelActive(true);
-            _paintingInfoPanelView.SetAllItemsFalse();
-           } else if (_paintingInfoScreensController.GetPaintingInfoActiveStatus()) {
-            _paintingInfoScreensController.SetPaintingInfoActive(false);
-            _paintingInfoScreensController.SetStartInfoPanelActive(true);
-             _paintingInfoPanelView.SetAllItemsFalse();
-           }
+        }
+        else if (_viewController.GetInfoScreensCanvas().activeSelf)
+        {
+            if (_paintingInfoScreensController.GetStartScreenInfoPanel().activeSelf)
+            {
+                _viewController.SetInfoScreensActive(false);
+            }
+            else if (_paintingInfoScreensController.GetAboutInfo().activeSelf)
+            {
+                _paintingInfoScreensController.SetAboutInfoActive(false);
+                _paintingInfoScreensController.SetStartScreenInfoActive(true);
+                // _paintingInfoScreensController.GetStartScreenInfoPanel().GetComponent<PaintingInfoStartScreenView>().SetAllItemsFalse();
+                // _paintingInfoPanelView.SetAllItemsFalse();
+            }
+            else if (_paintingInfoScreensController.GetPaintingInfo().activeSelf)
+            {
+                _paintingInfoScreensController.SetPaintingInfoActive(false);
+                _paintingInfoScreensController.SetStartScreenInfoActive(true);
+                // _paintingInfoScreensController.GetStartScreenInfoPanel().GetComponent<PaintingInfoStartScreenView>().SetAllItemsFalse();
+            }
         }
     }
     private IEnumerator TouchDelay()

@@ -3,98 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using Newtonsoft.Json;
 
 public class PaintingInfoScreensController : MonoBehaviour
 {
+    // [SerializeField]
+    // private GameObject _paintingInfoScreens;
     [SerializeField]
-    private GameObject _startInfoPanel;
-     [SerializeField]
+    private GameObject _startScreenInfoPanel;
+    [SerializeField]
     private GameObject _aboutPaintingInfoPanel;
-     [SerializeField]
+    [SerializeField]
     private GameObject _aboutInfoPanel;
+    private string _parentName;
     public List<PaintingInfo> _paintingInfos;
-    public string _parentName;
-    private InfoMenu _infoMenu;
+    private InfoDetailMenu _infoMenu;
+    private ViewController _viewController;
 
-    void Start() {
+    void Start()
+    {
         LoadJSON();
+        _viewController = FindObjectOfType<ViewController>();
     }
 
     void Update()
     {
-          _infoMenu = FindObjectOfType<InfoMenu>();
-         _parentName = _infoMenu.GetParentName();
+        _infoMenu = FindObjectOfType<InfoDetailMenu>();
+        _parentName = _infoMenu.GetParentName();
     }
 
-
-    public void SetStartInfoPanelActive(bool active){
-        _startInfoPanel.SetActive(active);
+    public string GetParentName()
+    {
+        return _parentName;
     }
-    public void SetPaintingInfoActive(bool active){
+
+    public void SetStartScreenInfoActive(bool active)
+    {
+        _startScreenInfoPanel.SetActive(active);
+    }
+    public void SetPaintingInfoActive(bool active)
+    {
         _aboutPaintingInfoPanel.SetActive(active);
     }
-    public void SetAboutInfoActive(bool active){
+    public void SetAboutInfoActive(bool active)
+    {
         _aboutInfoPanel.SetActive(active);
     }
-    public bool GetStartInfoPanelActiveStatus(){
-        return _startInfoPanel.activeSelf;
-    }
-    public bool GetPaintingInfoActiveStatus(){
-        return _aboutPaintingInfoPanel.activeSelf;
-    }
-    public bool GetAboutInfoActiveStatus(){
-        return _aboutInfoPanel.activeSelf;
-    }
-
-    // public void GetDetailedPaintingInformation()
-    //{
-    //    if (_parentName.Contains("Dinner"))
-   //     {
-    //        _viewController._infoScreens.SetActive(true);
-    //        //DisplayInfo(_paintingInfos[1]);
-            //infoMenuView.SetTextAboutPainting(_paintingInfos[1].AboutPainting);
-//
-   //     }
-   //     else if (_parentName.Contains("Harbour"))
-    //    {
-    //        DisplayInfo(_paintingInfos[0]);
-    //    }
-   //     else
-    //    {
-   //         Debug.Log("No Information about this painting available");
-    //    }
-    //}
-
-     private string WrapArray(string jsonArray)
+    public GameObject GetStartScreenInfoPanel()
     {
-        return "{\"Paintings\":" + jsonArray + "}";
+        return _startScreenInfoPanel;
     }
-
-    void DisplayInfo(PaintingInfo painting)
+    public GameObject GetPaintingInfo()
     {
-
-        Debug.Log($"Artist: {painting.Significance}");
-
-        foreach (var item in painting.AboutPainting)
-        {
-            Debug.Log($"{item.Title}: {item.Artist}: {item.Medium}: {item.Date}");
-        }
-
-        foreach (var item in painting.AboutArtist)
-        {
-            Debug.Log($"{item.Title}: {item.Detail}");
-        }
-
-        foreach (var item in painting.AboutEra)
-        {
-            Debug.Log($"{item.Title}: {item.Detail}");
-        }
-
-        foreach (var item in painting.FunFacts)
-        {
-            Debug.Log($"{item.Title}: {item.Detail}");
-        }
-
+        return _aboutPaintingInfoPanel;
+    }
+    public GameObject GetAboutInfo()
+    {
+        return _aboutInfoPanel;
     }
 
     public void LoadJSON()
@@ -103,15 +68,12 @@ public class PaintingInfoScreensController : MonoBehaviour
 
         if (File.Exists(path))
         {
-            string json = File.ReadAllText(path);
-            _paintingInfos = JsonUtility.FromJson<Wrapper>(WrapArray(json)).Paintings;
+            string jsonString = File.ReadAllText(path);
+            _paintingInfos = JsonConvert.DeserializeObject<List<PaintingInfo>>(jsonString);
         }
         else
         {
             Debug.LogError("JSON file not found!");
         }
     }
-
-    
-
 }
