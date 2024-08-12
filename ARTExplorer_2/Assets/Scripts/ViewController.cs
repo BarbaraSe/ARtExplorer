@@ -66,6 +66,6 @@ public class ViewController : MonoBehaviour
         infoButtonMenu.SetActive(false);
         childCopyBtn.AddComponent<InfoDetailMenu>();
         childCopyBtn.transform.name = "InfoBtn";
-        childCopyBtn.transform.localPosition = new Vector3(0.4f, 0, 0);
+        childCopyBtn.transform.localPosition = new Vector3(0.6f, 0, 0);
     }
 }

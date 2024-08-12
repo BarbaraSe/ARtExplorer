@@ -157,6 +157,11 @@ public class UIMenuController : MonoBehaviour
                 keyValue.Value.GameObject.SetActive(!keyValue.Value.GameObject.activeSelf);
                 Debug.Log(keyValue.Value.GameObject.activeSelf ? "Enable Object Visibility" : "Disable Object Visibility");
             }
+             if (keyValue.Key == "InfoBtn" && keyValue.Key == "InfoMenuDetail")
+            {
+                keyValue.Value.GameObject.SetActive(true);
+                Debug.Log(keyValue.Value.GameObject.activeSelf ? "Enable Object Visibility" : "Disable Object Visibility");
+            }
         }
     }
 }
